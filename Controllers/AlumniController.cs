@@ -8,21 +8,27 @@ using Microsoft.EntityFrameworkCore;
 using ElyriaAlumniAssociation.Data;
 using ElyriaAlumniAssociation.Models;
 using ElyriaAlumniAssociation.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Net.NetworkInformation;
+
 
 namespace ElyriaAlumniAssociation.Controllers
 {
     public class AlumniController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AlumniController(ApplicationDbContext context)
+        public AlumniController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Alumni
         public async Task<IActionResult> Index()
         {
+
             if (_context.Alumnus != null)
             {
                 return View(await _context.Alumnus.ToListAsync());
@@ -34,6 +40,7 @@ namespace ElyriaAlumniAssociation.Controllers
         // GET: Alumni/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null || _context.Alumnus == null)
             {
                 return NotFound();
@@ -62,11 +69,20 @@ namespace ElyriaAlumniAssociation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus")] Alumnus alumnus)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
             if (ModelState.IsValid)
             {
                 _context.Add(alumnus);
                 await _context.SaveChangesAsync();
-                return Redirect("ThankYou");
+                if (user == null)
+                {
+                    return Redirect("ThankYou");
+                } else
+                {
+                    return Redirect("Index");
+                }
+                   
             }
             return View(alumnus);
         }
@@ -94,6 +110,7 @@ namespace ElyriaAlumniAssociation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus")] Alumnus alumnus)
         {
+
             if (id != alumnus.Id)
             {
                 return NotFound();
