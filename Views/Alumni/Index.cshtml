@@ -1,4 +1,4 @@
-﻿@model IList<ElyriaAlumniAssociation.ViewModels.AlumnusViewModel>
+﻿@model IList<ElyriaAlumniAssociation.Models.Alumnus>
 
 @{
     ViewData["Title"] = "Index";
@@ -50,9 +50,8 @@
             {
                 <tr>
                     <td>
-                        <input type="hidden" asp-for="@Model[i].Alumni.Value" />
-                        <input asp-for="@Model[i].Alumni.Selected" />
-                        <input type="hidden" asp-for="@Model[i].Id" />
+                        <input asp-for="@Model[i].Selected" value="true" type="checkbox" />
+                        <input asp-for="@Model[i].Id" type="hidden"/>
                     </td>
                     <td>
                         @Html.DisplayFor(model => Model[i].FirstName)

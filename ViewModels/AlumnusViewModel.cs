@@ -31,6 +31,7 @@ namespace ElyriaAlumniAssociation.ViewModels
         public bool ROTC { get; set; }
         public string? OtherActivities { get; set; }
         public string? CurrentStatus { get; set; }
-        public SelectListItem? Alumni { get; set; }
+        public bool Selected { get; set; }
+        public SelectListItem Alumni { get; set; }
     }
 }

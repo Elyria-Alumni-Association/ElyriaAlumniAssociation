@@ -69,9 +69,9 @@ namespace ElyriaAlumniAssociation.Models
         [Display(Name ="Other Activities")]
         public string? OtherActivities { get; set; }
         [Display(Name ="Current Status")]
-        public string? CurrentStatus { get; set; }
+        public string CurrentStatus { get; set; }
         [NotMapped]
-        public bool? Selected { get; set; }
+        public bool Selected { get; set; }
 
 
     }

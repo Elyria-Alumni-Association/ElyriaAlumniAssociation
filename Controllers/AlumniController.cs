@@ -25,40 +25,7 @@ namespace ElyriaAlumniAssociation.Controllers
         {
             if (_context.Alumnus != null)
             {
-                List<AlumnusViewModel> alumnusViewModels = new List<AlumnusViewModel>();
-                var items = await _context.Alumnus.ToListAsync();
-                foreach (var item in items)
-                {
-                    alumnusViewModels.Add(new AlumnusViewModel
-                    {
-                        Id = item.Id,
-                        FirstName = item.FirstName,
-                        LastName = item.LastName,
-                        MiddleInitial = item.MiddleInitial,
-                        LastNameAtGraduation = item.LastNameAtGraduation,
-                        School = item.School,
-                        GraduationYear = item.GraduationYear,
-                        StreetAddress = item.StreetAddress,
-                        City = item.City,
-                        Country = item.Country,
-                        PostalCode = item.PostalCode,
-                        EmailAddress = item.EmailAddress,
-                        PhoneNumber = item.PhoneNumber,
-                        ScholasticAward = item.ScholasticAward,
-                        Athletics = item.Athletics,
-                        Theatre = item.Theatre,
-                        Band = item.Band,
-                        Choir = item.Choir,
-                        Clubs = item.Clubs,
-                        ClassOfficer = item.ClassOfficer,
-                        ROTC = item.ROTC,
-                        OtherActivities = item.OtherActivities,
-                        CurrentStatus = item.CurrentStatus
-
-                    });
-                }
-
-                return View(alumnusViewModels);
+                return View(await _context.Alumnus.ToListAsync());
             }
 
             return Problem("Entity set 'ApplicationDbContext.Alumnus'  is null.");
@@ -99,7 +66,7 @@ namespace ElyriaAlumniAssociation.Controllers
             {
                 _context.Add(alumnus);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("ThankYou");
             }
             return View(alumnus);
         }
@@ -194,21 +161,25 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteAlumni(List<AlumnusViewModel>? alumni)
+        public async Task<IActionResult> DeleteAlumni(List<Alumnus>? alumni)
         {
             List<Alumnus> alumniToDelete = new List<Alumnus>();
-            foreach (var item in alumni)
+            foreach (var alumnus in alumni)
             {
-                var selectedAlumnus = await _context.Alumnus.FindAsync(item.Id);
-                if (selectedAlumnus != null)
+                if (alumnus.Selected)
                 {
-                    alumniToDelete.Add(selectedAlumnus);
+                    alumniToDelete.Add(alumnus);
                 }
             }
 
             _context.Alumnus.RemoveRange(alumniToDelete);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult ThankYou()
+        {
+            return View();
         }
 
         private bool AlumnusExists(int id)
