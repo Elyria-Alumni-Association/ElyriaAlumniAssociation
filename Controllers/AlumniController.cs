@@ -37,6 +37,20 @@ namespace ElyriaAlumniAssociation.Controllers
             return Problem("Entity set 'ApplicationDbContext.Alumnus'  is null.");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index(string FirstNameSearch)
+        {
+            ViewData["FirstNameSearch"] = FirstNameSearch;
+            var result = await _context.Alumnus.ToListAsync();
+
+            if (!String.IsNullOrEmpty(FirstNameSearch))
+            {
+                result= await _context.Alumnus.Where(x => x.FirstName.Contains(FirstNameSearch)).ToListAsync();
+            }
+
+            return View(result);
+        }
+
         // GET: Alumni/Details/5
         public async Task<IActionResult> Details(int? id)
         {

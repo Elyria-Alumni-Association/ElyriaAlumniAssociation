@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Enter Alumni First Name" value="@ViewData["FirstNameSearch"]" name="FirstNameSearch"
+    </p>
+
+</form>
 <form asp-action="DeleteAlumni" asp-controller="Alumni" method="post">
     <table class="table">
         <thead>
