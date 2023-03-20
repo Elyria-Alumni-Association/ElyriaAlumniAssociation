@@ -1,0 +1,114 @@
+﻿@model IList<ElyriaAlumniAssociation.ViewModels.AlumnusViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="DeleteAlumni" asp-controller="Alumni" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="allcheck" id="selectAll" /> Select All
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Middle Initial
+                </th>
+                <th>
+                    Last Name at Graduation
+                </th>
+                <th>
+                    School
+                </th>
+                <th>
+                    Graduation Year
+                </th>
+
+                <th>
+                   Email Address
+                </th>
+                <th>
+                    Phone Number
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="@Model[i].Alumni.Value" />
+                        <input asp-for="@Model[i].Alumni.Selected" />
+                        <input type="hidden" asp-for="@Model[i].Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].MiddleInitial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].LastNameAtGraduation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].School)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].GraduationYear)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => Model[i].EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].PhoneNumber)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*@{
+    var Model[i]s = Model.ToList();
+    <a asp-action="DeleteAlumni" asp-route-alumni="@Model[i]s[0].Alumni">Delete Selected</a>
+    }*@
+    <div>
+        <input type="submit" value="Delete Selected" />
+    </div>
+</form>
+
+@section scripts{
+    <script>
+             $(function (){
+            $("#selectAll").click(function (){
+                $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+            });
+            $("input[type=checkbox]").click(function () {
+                if(!$(this).prop("checked")) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        })
+    </script>
+}

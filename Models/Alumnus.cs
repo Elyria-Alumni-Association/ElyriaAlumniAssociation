@@ -1,8 +1,9 @@
-﻿using AlumniDatabase.Utils;
+﻿
+using ElyriaAlumniAssociation.Utils;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AlumniDatabase.Models
+namespace ElyriaAlumniAssociation.Models
 {
     public class Alumnus
     {

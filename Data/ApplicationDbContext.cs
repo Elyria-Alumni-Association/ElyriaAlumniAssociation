@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ElyriaAlumniAssociation.Models;
 
 namespace ElyriaAlumniAssociation.Data
 {
@@ -9,5 +10,6 @@ namespace ElyriaAlumniAssociation.Data
             : base(options)
         {
         }
+        public DbSet<ElyriaAlumniAssociation.Models.Alumnus>? Alumnus { get; set; }
     }
 }

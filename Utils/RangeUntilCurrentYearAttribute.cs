@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AlumniDatabase.Utils
+namespace ElyriaAlumniAssociation.Utils
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class RangeUntilCurrentYearAttribute : RangeAttribute

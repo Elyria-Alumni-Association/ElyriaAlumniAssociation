@@ -1,9 +1,9 @@
-﻿using AlumniDatabase.Utils;
+﻿using ElyriaAlumniAssociation.Utils;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace AlumniDatabase_MVC.ViewModels
+namespace ElyriaAlumniAssociation.ViewModels
 {
     public class AlumnusViewModel
     {
@@ -31,6 +31,6 @@ namespace AlumniDatabase_MVC.ViewModels
         public bool ROTC { get; set; }
         public string? OtherActivities { get; set; }
         public string? CurrentStatus { get; set; }
-        public SelectListItem Alumni { get; set; }
+        public SelectListItem? Alumni { get; set; }
     }
 }
