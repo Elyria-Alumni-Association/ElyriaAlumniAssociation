@@ -38,14 +38,28 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string FirstNameSearch)
+        public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch)
         {
             ViewData["FirstNameSearch"] = FirstNameSearch;
+            ViewData["LastNameSearch"] = LastNameSearch;
+            ViewData["LastNameAtGraduationSearch"] = LastNameAtGraduationSearch;
+
             var result = await _context.Alumnus.ToListAsync();
 
             if (!String.IsNullOrEmpty(FirstNameSearch))
             {
-                result= await _context.Alumnus.Where(x => x.FirstName.Contains(FirstNameSearch)).ToListAsync();
+                FirstNameSearch = FirstNameSearch.ToUpper();
+                result= result.Where(x => x.FirstName.ToUpper().Contains(FirstNameSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(LastNameSearch))
+            {
+                LastNameSearch = LastNameSearch.ToUpper();
+                result = result.Where(x => x.LastName.ToUpper().Contains(LastNameSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(LastNameAtGraduationSearch))
+            {
+                LastNameAtGraduationSearch = LastNameAtGraduationSearch.ToUpper();
+                result = result.Where(x => x.LastNameAtGraduation.ToUpper().Contains(LastNameAtGraduationSearch)).ToList();
             }
 
             return View(result);
