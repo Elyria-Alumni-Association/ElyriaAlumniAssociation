@@ -10,26 +10,63 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-@*<form method="get" asp-action="Index">
-  
-    <input type="submit" value="Apply Filter" />
-
-</form>*@
-
-<form method="get" asp-action="Index">
-    <p>
-        <input type="search" placeholder="First Name" value="@ViewData["FirstNameSearch"]" name="FirstNameSearch"
-    </p>
-    <p>
-        <input type="search" placeholder="Last Name" value="@ViewData["LastNameSearch"]" name="LastNameSearch"
-    </p>
-    <p>
-        <input type="search" placeholder="Last Name at Graduation" value="@ViewData["LastNameAtGraduationSearch"]" name="LastNameAtGraduationSearch"
-    </p>
-    <br />
-    <br />
-    <input type="submit" value="Apply Filters" />
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Search Criteria (Filters Are Cumulative)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <form method="get" asp-action="Index">
+            <td>
+                
+                    <p>
+                        <input type="search" placeholder="First Name" value="@ViewData["FirstNameSearch"]" name="FirstNameSearch" />
+                    </p>
+                    <p>
+                        <input type="search" placeholder="Last Name" value="@ViewData["LastNameSearch"]" name="LastNameSearch" />
+                    </p>
+                    <p>
+                        <input type="search" placeholder="Last Name at Graduation" value="@ViewData["LastNameAtGraduationSearch"]" name="LastNameAtGraduationSearch" />
+                    </p>  
+            </td>
+            <td>
+                <p>
+                    <input type="search" placeholder="Email" value="@ViewData["EmailSearch"]" name="EmailSearch" />
+                </p>
+                <p>
+                    <input type="search" placeholder="Phone Number" value="@ViewData["PhoneNumberSearch"]" name="PhoneNumberSearch" />
+                </p>
+                <p>
+                    <input type="search" placeholder="School Attended" value="@ViewData["SchoolSearch"]" name="SchoolSearch" />
+                </p>
+            </td>
+            <td>
+                <p>
+                    <label for="GraduationStart">Graduation Year Range Start</label>
+                    <br />
+                    <input type="search" placeholder="Graduation Years Start" value="@ViewData["GraduationYearStartSearch"]" name="GraduationYearStartSearch" id="GraduationStart" />
+                </p>
+                <p>
+                    <label for="GraduationEnd">Graduation Year Range End</label>
+                    <br />
+                    <input type="search" placeholder="Graduation Years End" value="@ViewData["GraduationYearEndSearch"]" name="GraduationYearEndSearch" id="GraduationEnd"/>
+                </p>
+            </td>
+            <tr>
+                <td>
+                <input type="submit" value="Apply Filters" />
+                </td>
+            <td>
+                <a asp-action="Index" class="btn btn-primary">Clear Filters</a>
+            </td>
+            </tr>
+            </form>
+    </tbody>
+</table>
 <form asp-action="DeleteAlumni" asp-controller="Alumni" method="post">
     <table class="table">
         <thead>

@@ -38,11 +38,17 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch)
+        public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch, string EmailSearch,
+            string PhoneNumberSearch, string SchoolSearch, int GraduationYearStartSearch, int GraduationYearEndSearch)
         {
             ViewData["FirstNameSearch"] = FirstNameSearch;
             ViewData["LastNameSearch"] = LastNameSearch;
             ViewData["LastNameAtGraduationSearch"] = LastNameAtGraduationSearch;
+            ViewData["EmailSearch"] = EmailSearch;
+            ViewData["PhoneNumberSearch"] = PhoneNumberSearch;
+            ViewData["SchoolSearch"] = SchoolSearch;
+            ViewData["GraduationYearStartSearch"] = GraduationYearStartSearch;
+            ViewData["GraduationYearEndSearch"] = GraduationYearStartSearch;
 
             var result = await _context.Alumnus.ToListAsync();
 
@@ -60,6 +66,25 @@ namespace ElyriaAlumniAssociation.Controllers
             {
                 LastNameAtGraduationSearch = LastNameAtGraduationSearch.ToUpper();
                 result = result.Where(x => x.LastNameAtGraduation.ToUpper().Contains(LastNameAtGraduationSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(EmailSearch))
+            {
+                EmailSearch = EmailSearch.ToUpper();
+                result = result.Where(x => x.EmailAddress.ToUpper().Contains(EmailSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(PhoneNumberSearch))
+            {
+                PhoneNumberSearch = PhoneNumberSearch.ToUpper();
+                result = result.Where(x => x.PhoneNumber.ToUpper().Contains(PhoneNumberSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(SchoolSearch))
+            {
+                SchoolSearch = SchoolSearch.ToUpper();
+                result = result.Where(x => x.School.ToUpper().Contains(SchoolSearch)).ToList();
+            }
+            if (GraduationYearStartSearch != 0 && GraduationYearEndSearch != 0)
+            {
+                result = result.Where(x => x.GraduationYear >= GraduationYearStartSearch &&  x.GraduationYear <= GraduationYearEndSearch).ToList();
             }
 
             return View(result);
@@ -232,4 +257,5 @@ namespace ElyriaAlumniAssociation.Controllers
           return (_context.Alumnus?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
 }
