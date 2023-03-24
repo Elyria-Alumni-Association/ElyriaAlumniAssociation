@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ElyriaAlumniAssociation.Data;
 using ElyriaAlumniAssociation.Models;
-using ElyriaAlumniAssociation.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Net.NetworkInformation;
-
+using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using System.Reflection.Metadata;
 
 namespace ElyriaAlumniAssociation.Controllers
 {
@@ -26,6 +27,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
 
@@ -38,18 +40,11 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch, string EmailSearch,
             string PhoneNumberSearch, string SchoolSearch, int GraduationYearStartSearch, int GraduationYearEndSearch)
         {
-            ViewData["FirstNameSearch"] = FirstNameSearch;
-            ViewData["LastNameSearch"] = LastNameSearch;
-            ViewData["LastNameAtGraduationSearch"] = LastNameAtGraduationSearch;
-            ViewData["EmailSearch"] = EmailSearch;
-            ViewData["PhoneNumberSearch"] = PhoneNumberSearch;
-            ViewData["SchoolSearch"] = SchoolSearch;
-            ViewData["GraduationYearStartSearch"] = GraduationYearStartSearch;
-            ViewData["GraduationYearEndSearch"] = GraduationYearStartSearch;
-
+         
             var result = await _context.Alumnus.ToListAsync();
 
             if (!String.IsNullOrEmpty(FirstNameSearch))
@@ -82,8 +77,20 @@ namespace ElyriaAlumniAssociation.Controllers
                 SchoolSearch = SchoolSearch.ToUpper();
                 result = result.Where(x => x.School.ToUpper().Contains(SchoolSearch)).ToList();
             }
-            if (GraduationYearStartSearch != 0 && GraduationYearEndSearch != 0)
+            if (GraduationYearStartSearch != 0 || GraduationYearEndSearch != 0)
             {
+                if(GraduationYearStartSearch == 0)
+                {
+                    GraduationYearStartSearch = 1900;
+                }
+
+                if (GraduationYearEndSearch == 0)
+                {
+                    string year = DateTime.Now.Year.ToString();
+
+                    GraduationYearEndSearch = Convert.ToInt32(year, 10);
+                }
+
                 result = result.Where(x => x.GraduationYear >= GraduationYearStartSearch &&  x.GraduationYear <= GraduationYearEndSearch).ToList();
             }
 

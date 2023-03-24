@@ -10,42 +10,42 @@ namespace ElyriaAlumniAssociation.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(25)]
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }
         [Required]
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(25)]
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(1)]
         public string? MiddleInitial { get; set; }
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(25)]
         [Display(Name ="Maiden/Name at Graduation")]
         public string? LastNameAtGraduation { get; set; }
         [Required]
         public string? School { get; set; }
         [Required]
-        [RangeUntilCurrentYear(1900)]
+        [RangeUntilCurrentYear(1900, ErrorMessage = "Must be between 1900 and present year")]
         [Display(Name ="Graduation Year")]
         public int GraduationYear { get; set; }
         [Required]
-        [RegularExpression(@"[\w\s]+")]
+        [RegularExpression(@"[\w\s]+", ErrorMessage = "Must contain only letters, numbers, or spaces")]
         [Display(Name ="Street Address")]
         public string? StreetAddress { get; set; }
         [Required]
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(25)]
         public string? City { get; set; }
         [Required]
-        [RegularExpression(@"[a-zA-Z\s]+")]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
         [StringLength(25)]
         public string? Country { get; set; }
         [Required]
-        [RegularExpression(@"[\w\s\-]+")]
+        [RegularExpression(@"[\w\s\-]+", ErrorMessage = "Must contain only letters, numbers, spaces, or dashes")]
         [StringLength(25)]
         [Display(Name ="Postal Code")]
         public string? PostalCode { get; set; }

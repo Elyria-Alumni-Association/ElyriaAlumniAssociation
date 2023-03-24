@@ -24,36 +24,32 @@
             <td>
                 
                     <p>
-                        <input type="search" placeholder="First Name" value="@ViewData["FirstNameSearch"]" name="FirstNameSearch" />
+                        <input type="search" placeholder="First Name" name="FirstNameSearch" />
                     </p>
                     <p>
-                        <input type="search" placeholder="Last Name" value="@ViewData["LastNameSearch"]" name="LastNameSearch" />
+                        <input type="search" placeholder="Last Name" name="LastNameSearch" />
                     </p>
                     <p>
-                        <input type="search" placeholder="Last Name at Graduation" value="@ViewData["LastNameAtGraduationSearch"]" name="LastNameAtGraduationSearch" />
+                        <input type="search" placeholder="Last Name at Graduation" name="LastNameAtGraduationSearch" />
                     </p>  
             </td>
             <td>
                 <p>
-                    <input type="search" placeholder="Email" value="@ViewData["EmailSearch"]" name="EmailSearch" />
+                    <input type="search" placeholder="Email" name="EmailSearch" />
                 </p>
                 <p>
-                    <input type="search" placeholder="Phone Number" value="@ViewData["PhoneNumberSearch"]" name="PhoneNumberSearch" />
+                    <input type="search" placeholder="Phone Number" name="PhoneNumberSearch" />
                 </p>
                 <p>
-                    <input type="search" placeholder="School Attended" value="@ViewData["SchoolSearch"]" name="SchoolSearch" />
+                    <input type="search" placeholder="School Attended" name="SchoolSearch" />
                 </p>
             </td>
             <td>
                 <p>
-                    <label for="GraduationStart">Graduation Year Range Start</label>
-                    <br />
-                    <input type="search" placeholder="Graduation Years Start" value="@ViewData["GraduationYearStartSearch"]" name="GraduationYearStartSearch" id="GraduationStart" />
+                    <input type="search" placeholder="Graduation Years Start" name="GraduationYearStartSearch" id="GraduationStart" />
                 </p>
                 <p>
-                    <label for="GraduationEnd">Graduation Year Range End</label>
-                    <br />
-                    <input type="search" placeholder="Graduation Years End" value="@ViewData["GraduationYearEndSearch"]" name="GraduationYearEndSearch" id="GraduationEnd"/>
+                   <input type="search" placeholder="Graduation Years End" name="GraduationYearEndSearch" id="GraduationEnd"/>
                 </p>
             </td>
             <tr>
@@ -146,12 +142,27 @@
             }
         </tbody>
     </table>
-    @*@{
-    var Model[i]s = Model.ToList();
-    <a asp-action="DeleteAlumni" asp-route-alumni="@Model[i]s[0].Alumni">Delete Selected</a>
-    }*@
     <div>
-        <input type="submit" value="Delete Selected" />
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Delete Selected
+        </button>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to delete the selected entries? They will be permanently deleted</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Delete Selected</button>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 
