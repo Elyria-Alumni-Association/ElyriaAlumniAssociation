@@ -27,7 +27,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Index()
         {
 
@@ -40,7 +40,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch, string EmailSearch,
             string PhoneNumberSearch, string SchoolSearch, int GraduationYearStartSearch, int GraduationYearEndSearch)
         {
