@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>View Alumni Information</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-danger">Create New</a>
 </p>
 
 <table class="table">
@@ -54,10 +54,10 @@
             </td>
             <tr>
                 <td>
-                <input type="submit" value="Apply Filters" />
+                <input type="submit" class="btn btn-secondary" value="Apply Filters" />
                 </td>
             <td>
-                <a asp-action="Index" class="btn btn-primary">Clear Filters</a>
+                <a asp-action="Index" class="btn btn-dark">Clear Filters</a>
             </td>
             </tr>
             </form>
@@ -143,7 +143,7 @@
         </tbody>
     </table>
     <div>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal">
             Delete Selected
         </button>
     </div>

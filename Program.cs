@@ -1,5 +1,7 @@
 using ElyriaAlumniAssociation.Data;
+using ElyriaAlumniAssociation.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +23,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdministratorRole",
          policy => policy.RequireRole("Admin"));
 });
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 
 var app = builder.Build();

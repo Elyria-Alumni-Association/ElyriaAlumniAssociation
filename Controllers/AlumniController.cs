@@ -27,7 +27,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni
-        [Authorize(Policy = "RequireAdministratorRole")]
+        [Authorize]
         public async Task<IActionResult> Index()
         {
 
@@ -40,7 +40,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireAdministratorRole")]
+        [Authorize]
         public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch, string EmailSearch,
             string PhoneNumberSearch, string SchoolSearch, int GraduationYearStartSearch, int GraduationYearEndSearch)
         {
@@ -98,6 +98,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -148,6 +149,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Alumnus == null)
@@ -168,6 +170,7 @@ namespace ElyriaAlumniAssociation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus")] Alumnus alumnus)
         {
 
@@ -200,6 +203,7 @@ namespace ElyriaAlumniAssociation.Controllers
         }
 
         // GET: Alumni/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Alumnus == null)
@@ -238,6 +242,7 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteAlumni(List<Alumnus>? alumni)
         {
             List<Alumnus> alumniToDelete = new List<Alumnus>();
