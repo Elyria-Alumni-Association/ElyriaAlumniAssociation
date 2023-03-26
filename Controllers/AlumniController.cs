@@ -290,13 +290,15 @@ namespace ElyriaAlumniAssociation.Controllers
             }
 
             string filePath = ".\\CSVFiles\\AlumniData.csv";
+            string loggedInUser = User.Identity.Name;
+            string message = "Attached is the data you requested at " + DateTime.Now.ToString() + ".";
             using (var writer = new StreamWriter(filePath))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(alumniToExport);
             }
 
-            await _emailSender.SendEmailAsync("lengen.6@gmail.com", "Alumni Data", "There should be an attachment here");
+            await _emailSender.SendEmailAsync(loggedInUser, "Alumni Data", message);
 
             return RedirectToAction("Index");
         }
