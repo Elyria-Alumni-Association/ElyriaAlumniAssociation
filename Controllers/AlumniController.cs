@@ -12,6 +12,9 @@ using System.Net.NetworkInformation;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using System.Reflection.Metadata;
+using Microsoft.VisualBasic;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace ElyriaAlumniAssociation.Controllers
 {
@@ -256,6 +259,35 @@ namespace ElyriaAlumniAssociation.Controllers
 
             _context.Alumnus.RemoveRange(alumniToDelete);
             await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Export(List<Alumnus>? alumni)
+        {
+            List<Alumnus> alumniToExport = new List<Alumnus>();
+            foreach (var alumnus in alumni)
+            {
+                if (alumnus.Selected)
+                {
+                    var foundAlumnus = await _context.Alumnus.FirstOrDefaultAsync(x => x.Id == alumnus.Id);
+                    if(foundAlumnus != null)
+                    {
+                        alumniToExport.Add(foundAlumnus);
+                    }
+                }
+            }
+
+            string filePath = ".\\CSVFiles\\AlumniData.csv";
+            using (var writer = new StreamWriter(filePath))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(alumniToExport);
+            }
+
+
             return RedirectToAction("Index");
         }
 
