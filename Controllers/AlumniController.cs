@@ -15,6 +15,8 @@ using System.Reflection.Metadata;
 using Microsoft.VisualBasic;
 using CsvHelper;
 using CsvHelper.Configuration;
+using ElyriaAlumniAssociation.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace ElyriaAlumniAssociation.Controllers
 {
@@ -22,11 +24,18 @@ namespace ElyriaAlumniAssociation.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<AlumniController> _logger;
+        private readonly IEmailSender _emailSender;
 
-        public AlumniController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public AlumniController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IUserStore<IdentityUser> userStore,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<AlumniController> logger,
+            IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+            _logger = logger;
+            _emailSender = emailSender;
         }
 
         // GET: Alumni
@@ -287,6 +296,7 @@ namespace ElyriaAlumniAssociation.Controllers
                 csv.WriteRecords(alumniToExport);
             }
 
+            await _emailSender.SendEmailAsync("lengen.6@gmail.com", "Alumni Data", "There should be an attachment here");
 
             return RedirectToAction("Index");
         }

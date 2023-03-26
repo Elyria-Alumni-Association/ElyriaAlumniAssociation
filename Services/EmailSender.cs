@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using SendGrid.Helpers.Mail;
 using SendGrid;
+using System.Text;
 
 namespace ElyriaAlumniAssociation.Services
 {
@@ -24,20 +25,61 @@ namespace ElyriaAlumniAssociation.Services
             {
                 throw new Exception("Null SendGridKey");
             }
-            await Execute(Options.SendGridKey, subject, message, toEmail);
+
+            if(subject == "Alumni Data")
+            {
+                await Execute(Options.SendGridKey, subject, message, toEmail, ".\\CSVFiles\\AlumniData.csv");
+            }
+            else
+            {
+                await Execute(Options.SendGridKey, subject, message, toEmail);
+            }
         }
+
 
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
         {
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("m.lengen1@mail.lorainccc.edu", "Password Recovery"),
+                From = new EmailAddress("m.lengen1@mail.lorainccc.edu", "Elyria Alumni Association"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
             };
             msg.AddTo(new EmailAddress(toEmail));
+
+            // Disable click tracking.
+            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            msg.SetClickTracking(false, false);
+            var response = await client.SendEmailAsync(msg);
+            _logger.LogInformation(response.IsSuccessStatusCode
+                                   ? $"Email to {toEmail} queued successfully!"
+                                   : $"Failure Email to {toEmail}");
+        }
+
+        public async Task Execute(string apiKey, string subject, string message, string toEmail, string filePath)
+        {
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("m.lengen1@mail.lorainccc.edu", "Elyria Alumni Association"),
+                Subject = subject,
+                PlainTextContent = message,
+                HtmlContent = message
+            };
+            msg.AddTo(new EmailAddress(toEmail));
+            byte[] byteData = Encoding.ASCII.GetBytes(File.ReadAllText(filePath));
+            msg.Attachments = new List<SendGrid.Helpers.Mail.Attachment>
+        {
+            new SendGrid.Helpers.Mail.Attachment
+            {
+                Content = Convert.ToBase64String(byteData),
+                Filename = "AlumniData.csv",
+                Type = "csv",
+                Disposition = "attachment"
+            }
+        };
 
             // Disable click tracking.
             // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
