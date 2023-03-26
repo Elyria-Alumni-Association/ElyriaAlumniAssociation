@@ -63,7 +63,7 @@
             </form>
     </tbody>
 </table>
-<form asp-action="Export" asp-controller="Alumni" method="post">
+<form asp-controller="Alumni" method="post">
     <table class="table">
         <thead>
             <tr>
@@ -146,6 +146,9 @@
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal">
             Delete Selected
         </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
+            Export Selected
+        </button>
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -159,7 +162,25 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-warning">Delete Selected</button>
+                    <button type="submit" asp-action="DeleteAlumni" class="btn btn-warning">Delete Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Export</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>The selected records will be exported to a .csv file and emailed to the logged in user's email address.'</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" asp-action="Export" class="btn btn-success">Export</button>
                 </div>
             </div>
         </div>
