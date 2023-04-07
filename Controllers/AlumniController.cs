@@ -53,60 +53,98 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index(string FirstNameSearch, string LastNameSearch, string LastNameAtGraduationSearch, string EmailSearch,
-            string PhoneNumberSearch, string SchoolSearch, int GraduationYearStartSearch, int GraduationYearEndSearch)
+        public async Task<IActionResult> Index(string sortOrder, string firstNameSearch, string lastNameSearch, string schoolSearch, int graduationYearStartSearch, int graduationYearEndSearch)
         {
-         
-            var result = await _context.Alumnus.ToListAsync();
+            var results = await _context.Alumnus.ToListAsync();
 
-            if (!String.IsNullOrEmpty(FirstNameSearch))
+            ViewData["LastNameSortParam"] = sortOrder == "last_name" ? "last_name_desc" : "last_name";
+            ViewData["FirstNameSortParam"] = sortOrder == "first_name" ? "first_name_desc" : "first_name";
+            ViewData["SchoolSortParam"] = sortOrder == "school" ? "school_desc" : "school";
+            ViewData["GraduationSortParam"] = sortOrder == "graduation" ? "graduation_desc" : "graduation";
+            ViewData["CitySortParam"] = sortOrder == "city" ? "city_desc" : "city";
+            ViewData["StateSortParam"] = sortOrder == "state" ? "state_desc" : "state";
+            ViewData["CountrySortParam"] = sortOrder == "country" ? "country_desc" : "country";
+
+            switch (sortOrder)
             {
-                FirstNameSearch = FirstNameSearch.ToUpper();
-                result= result.Where(x => x.FirstName.ToUpper().Contains(FirstNameSearch)).ToList();
+                case "last_name_desc":
+                    results = results.OrderByDescending(a => a.LastName).ToList();
+                    break;
+                case "last_name":
+                    results = results.OrderBy(a => a.LastName).ToList();
+                    break;
+                case "first_name":
+                    results = results.OrderBy(a => a.FirstName).ToList();
+                    break;
+                case "first_name_desc":
+                    results = results.OrderByDescending(a => a.FirstName).ToList();
+                    break;
+                case "school":
+                    results = results.OrderBy(a => a.School).ToList();
+                    break;
+                case "school_desc":
+                    results = results.OrderByDescending(a => a.School).ToList();
+                    break;
+                case "graduation":
+                    results = results.OrderBy(a => a.GraduationYear).ToList();
+                    break;
+                case "graduation_desc":
+                    results = results.OrderByDescending(a => a.GraduationYear).ToList();
+                    break;
+                case "city":
+                    results = results.OrderBy(a => a.City).ToList();
+                    break;
+                case "city_desc":
+                    results = results.OrderByDescending(a => a.City).ToList();
+                    break;
+                case "state":
+                    results = results.OrderBy(a => a.State).ToList();
+                    break;
+                case "state_desc":
+                    results = results.OrderByDescending(a => a.State).ToList();
+                    break;
+                case "country":
+                    results = results.OrderBy(a => a.Country).ToList();
+                    break;
+                case "country_desc":
+                    results = results.OrderByDescending(a => a.Country).ToList();
+                    break;
             }
-            if (!String.IsNullOrEmpty(LastNameSearch))
+
+
+            if (!String.IsNullOrEmpty(firstNameSearch))
             {
-                LastNameSearch = LastNameSearch.ToUpper();
-                result = result.Where(x => x.LastName.ToUpper().Contains(LastNameSearch)).ToList();
+                firstNameSearch = firstNameSearch.ToUpper();
+                results= results.Where(x => x.FirstName.ToUpper().Contains(firstNameSearch)).ToList();
             }
-            if (!String.IsNullOrEmpty(LastNameAtGraduationSearch))
+            if (!String.IsNullOrEmpty(lastNameSearch))
             {
-                LastNameAtGraduationSearch = LastNameAtGraduationSearch.ToUpper();
-                result = result.Where(x => x.LastNameAtGraduation.ToUpper().Contains(LastNameAtGraduationSearch)).ToList();
+                lastNameSearch = lastNameSearch.ToUpper();
+                results = results.Where(x => x.LastName.ToUpper().Contains(lastNameSearch)).ToList();
             }
-            if (!String.IsNullOrEmpty(EmailSearch))
+            if (!String.IsNullOrEmpty(schoolSearch))
             {
-                EmailSearch = EmailSearch.ToUpper();
-                result = result.Where(x => x.EmailAddress.ToUpper().Contains(EmailSearch)).ToList();
+                schoolSearch = schoolSearch.ToUpper();
+                results = results.Where(x => x.School.ToUpper().Contains(schoolSearch)).ToList();
             }
-            if (!String.IsNullOrEmpty(PhoneNumberSearch))
+            if (graduationYearStartSearch != 0 || graduationYearEndSearch != 0)
             {
-                PhoneNumberSearch = PhoneNumberSearch.ToUpper();
-                result = result.Where(x => x.PhoneNumber.ToUpper().Contains(PhoneNumberSearch)).ToList();
-            }
-            if (!String.IsNullOrEmpty(SchoolSearch))
-            {
-                SchoolSearch = SchoolSearch.ToUpper();
-                result = result.Where(x => x.School.ToUpper().Contains(SchoolSearch)).ToList();
-            }
-            if (GraduationYearStartSearch != 0 || GraduationYearEndSearch != 0)
-            {
-                if(GraduationYearStartSearch == 0)
+                if(graduationYearStartSearch == 0)
                 {
-                    GraduationYearStartSearch = 1900;
+                    graduationYearStartSearch = 1900;
                 }
 
-                if (GraduationYearEndSearch == 0)
+                if (graduationYearEndSearch == 0)
                 {
                     string year = DateTime.Now.Year.ToString();
 
-                    GraduationYearEndSearch = Convert.ToInt32(year, 10);
+                    graduationYearEndSearch = Convert.ToInt32(year, 10);
                 }
 
-                result = result.Where(x => x.GraduationYear >= GraduationYearStartSearch &&  x.GraduationYear <= GraduationYearEndSearch).ToList();
+                results = results.Where(x => x.GraduationYear >= graduationYearStartSearch &&  x.GraduationYear <= graduationYearEndSearch).ToList();
             }
 
-            return View(result);
+            return View(results);
         }
 
         // GET: Alumni/Details/5

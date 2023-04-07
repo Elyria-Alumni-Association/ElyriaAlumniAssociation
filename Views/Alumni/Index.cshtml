@@ -29,17 +29,8 @@
                     <p>
                         <input type="search" placeholder="Last Name" name="LastNameSearch" />
                     </p>
-                    <p>
-                        <input type="search" placeholder="Last Name at Graduation" name="LastNameAtGraduationSearch" />
-                    </p>  
             </td>
             <td>
-                <p>
-                    <input type="search" placeholder="Email" name="EmailSearch" />
-                </p>
-                <p>
-                    <input type="search" placeholder="Phone Number" name="PhoneNumberSearch" />
-                </p>
                 <p>
                     <input type="search" placeholder="School Attended" name="SchoolSearch" />
                 </p>
@@ -71,29 +62,25 @@
                     <input type="checkbox" name="allcheck" id="selectAll" /> Select All
                 </th>
                 <th>
-                    First Name
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstNameSortParam"]">First Name</a>
                 </th>
                 <th>
-                    Last Name
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">Last Name</a>
                 </th>
                 <th>
-                    Middle Initial
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]">School</a>
                 </th>
                 <th>
-                    Last Name at Graduation
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]">Graduation Year</a>
                 </th>
                 <th>
-                    School
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]">City</a>
                 </th>
                 <th>
-                    Graduation Year
-                </th>
-
-                <th>
-                   Email Address
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]">State</a>
                 </th>
                 <th>
-                    Phone Number
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]">Country</a>
                 </th>
 
                 <th></th>
@@ -114,12 +101,6 @@
                         @Html.DisplayFor(model => Model[i].LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => Model[i].MiddleInitial)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => Model[i].LastNameAtGraduation)
-                    </td>
-                    <td>
                         @Html.DisplayFor(model => Model[i].School)
                     </td>
                     <td>
@@ -127,10 +108,13 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(model => Model[i].EmailAddress)
+                        @Html.DisplayFor(model => Model[i].City)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => Model[i].PhoneNumber)
+                        @Html.DisplayFor(model => Model[i].State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].Country)
                     </td>
 
                     <td>
