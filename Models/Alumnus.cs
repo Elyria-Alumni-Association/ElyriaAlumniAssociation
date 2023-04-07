@@ -45,6 +45,10 @@ namespace ElyriaAlumniAssociation.Models
         [StringLength(25)]
         public string? Country { get; set; }
         [Required]
+        [RegularExpression(@"[a-zA-Z\s]+", ErrorMessage = "Must contain only letters or spaces")]
+        [StringLength(25)]
+        public string? State { get; set; }
+        [Required]
         [RegularExpression(@"[\w\s\-]+", ErrorMessage = "Must contain only letters, numbers, spaces, or dashes")]
         [StringLength(25)]
         [Display(Name ="Postal Code")]

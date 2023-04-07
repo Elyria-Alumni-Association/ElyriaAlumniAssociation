@@ -24,6 +24,7 @@ namespace ElyriaAlumniAssociation.Migrations
                     StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),

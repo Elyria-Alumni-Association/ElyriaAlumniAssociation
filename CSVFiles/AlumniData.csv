@@ -1,4 +1,2 @@
 Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus,Selected
-2,xiaoli,liu,L,,Elyria,1909,19101 Hilliard Blvd,Rocky River,United States,44116,xiaolilengen@gmail.com,+8618703970090,True,False,False,True,True,False,True,False,,Employed,False
-3,Michael,Lengen,G,,Elyria,1918,36273 Falcon Crest Avenue,Avon,United States,44011,lengen.6@gmail.com,4406574915,True,True,False,True,False,False,False,False,,Employed,False
-4,Test,Test,,Test,Elyria,1918,Test,Test,Test,123456,test@test.com,1234567890,True,False,False,True,False,False,False,True,,Retired,False
+6,Test,Test,,,Elyria,2002,Street 123,Test,USA,44011,test@test.com,123456789,False,True,False,True,False,False,False,True,,Employed,False

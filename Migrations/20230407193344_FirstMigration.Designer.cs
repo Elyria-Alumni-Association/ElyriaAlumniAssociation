@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElyriaAlumniAssociation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230324002104_FirstMigration")]
+    [Migration("20230407193344_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,11 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.Property<string>("School")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("StreetAddress")
                         .IsRequired()
