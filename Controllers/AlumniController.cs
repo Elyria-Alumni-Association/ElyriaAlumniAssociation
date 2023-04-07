@@ -54,7 +54,7 @@ namespace ElyriaAlumniAssociation.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Index(string sortOrder, string firstNameSearch, string lastNameSearch, string schoolSearch, string graduationYearStartSearch, string graduationYearEndSearch,
-            string citySearch, string stateSearch, string countrySearch)
+            string citySearch, string stateSearch, string countrySearch, bool scholasticSearch)
         {
             var results = await _context.Alumnus.ToListAsync();
 
@@ -74,6 +74,7 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["CityFilter"] = firstNameSearch;
             ViewData["LastNameFilter"] = lastNameSearch;
             ViewData["SchoolFilter"] = schoolSearch;
+            ViewData["ScholasticFilter"] = scholasticSearch;
 
             switch (sortOrder)
             {
@@ -155,6 +156,10 @@ namespace ElyriaAlumniAssociation.Controllers
 
 
                 results = results.Where(x => x.GraduationYear >= startYear &&  x.GraduationYear <= endYear).ToList();
+            }
+            if (scholasticSearch)
+            {
+                results = results.Where(x => x.ScholasticAward == scholasticSearch).ToList();
             }
 
             return View(results);

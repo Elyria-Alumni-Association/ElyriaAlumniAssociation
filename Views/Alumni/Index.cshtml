@@ -46,6 +46,17 @@
                     <input type="search" placeholder="School Attended" name="schoolSearch" value="@ViewData["SchoolFilter"]" />
                 </p>
             </td>
+            <td>
+                @if(ViewData["ScholasticFilter"].Equals(true)){
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="scholasticSearch" value="true" /> Scholastic Award
+                    </label>
+                } else {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="scholasticSearch" value="true" /> Scholastic Award
+                    </label>
+                }
+            </td>
             <tr>
                 <td>
                 <input type="submit" class="btn btn-secondary" value="Apply Filters" />
