@@ -24,23 +24,26 @@
             <td>
                 
                     <p>
-                        <input type="search" placeholder="First Name" name="FirstNameSearch" />
+                    <input type="search" placeholder="First Name" name="firstNameSearch" value="@ViewData["FirstNameFilter"]"/>
                     </p>
                     <p>
-                        <input type="search" placeholder="Last Name" name="LastNameSearch" />
+                    <input type="search" placeholder="Last Name" name="lastNameSearch" value="@ViewData["LastNameFilter"]" />
                     </p>
             </td>
             <td>
                 <p>
-                    <input type="search" placeholder="School Attended" name="SchoolSearch" />
+                    <input type="search" placeholder="City" name="citySearch" value="@ViewData["CityFilter"]" />
                 </p>
             </td>
             <td>
                 <p>
-                    <input type="search" placeholder="Graduation Years Start" name="GraduationYearStartSearch" id="GraduationStart" />
+                    <input type="search" placeholder="Graduation Years Start" name="graduationYearStartSearch" id="GraduationStart" value="@ViewData["GraduationStartFilter"]" />
                 </p>
                 <p>
-                   <input type="search" placeholder="Graduation Years End" name="GraduationYearEndSearch" id="GraduationEnd"/>
+                    <input type="search" placeholder="Graduation Years End" name="graduationYearEndSearch" id="GraduationEnd" value="@ViewData["GraduationEndFilter"]" />
+                </p>
+                <p>
+                    <input type="search" placeholder="School Attended" name="schoolSearch" value="@ViewData["SchoolFilter"]" />
                 </p>
             </td>
             <tr>

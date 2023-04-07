@@ -53,7 +53,8 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index(string sortOrder, string firstNameSearch, string lastNameSearch, string schoolSearch, int graduationYearStartSearch, int graduationYearEndSearch)
+        public async Task<IActionResult> Index(string sortOrder, string firstNameSearch, string lastNameSearch, string schoolSearch, string graduationYearStartSearch, string graduationYearEndSearch,
+            string citySearch, string stateSearch, string countrySearch)
         {
             var results = await _context.Alumnus.ToListAsync();
 
@@ -64,6 +65,15 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["CitySortParam"] = sortOrder == "city" ? "city_desc" : "city";
             ViewData["StateSortParam"] = sortOrder == "state" ? "state_desc" : "state";
             ViewData["CountrySortParam"] = sortOrder == "country" ? "country_desc" : "country";
+
+            ViewData["FirstNameFilter"] = firstNameSearch;
+            ViewData["LastNameFilter"] = lastNameSearch;
+            ViewData["SchoolFilter"] = schoolSearch;
+            ViewData["GraduationStartFilter"] = graduationYearStartSearch;
+            ViewData["GraduationEndFilter"] = graduationYearEndSearch;
+            ViewData["CityFilter"] = firstNameSearch;
+            ViewData["LastNameFilter"] = lastNameSearch;
+            ViewData["SchoolFilter"] = schoolSearch;
 
             switch (sortOrder)
             {
@@ -127,21 +137,24 @@ namespace ElyriaAlumniAssociation.Controllers
                 schoolSearch = schoolSearch.ToUpper();
                 results = results.Where(x => x.School.ToUpper().Contains(schoolSearch)).ToList();
             }
-            if (graduationYearStartSearch != 0 || graduationYearEndSearch != 0)
+            if (!String.IsNullOrEmpty(graduationYearStartSearch) || !String.IsNullOrEmpty(graduationYearEndSearch))
             {
-                if(graduationYearStartSearch == 0)
+                var startYear = 1900;
+                string year = DateTime.Now.Year.ToString();
+                var endYear = Convert.ToInt32(year, 10);
+
+                if (!String.IsNullOrEmpty(graduationYearStartSearch))
                 {
-                    graduationYearStartSearch = 1900;
+                    startYear = int.Parse(graduationYearStartSearch);
                 }
 
-                if (graduationYearEndSearch == 0)
+                if (!String.IsNullOrEmpty(graduationYearEndSearch))
                 {
-                    string year = DateTime.Now.Year.ToString();
-
-                    graduationYearEndSearch = Convert.ToInt32(year, 10);
+                    endYear = int.Parse(graduationYearEndSearch);
                 }
 
-                results = results.Where(x => x.GraduationYear >= graduationYearStartSearch &&  x.GraduationYear <= graduationYearEndSearch).ToList();
+
+                results = results.Where(x => x.GraduationYear >= startYear &&  x.GraduationYear <= endYear).ToList();
             }
 
             return View(results);
