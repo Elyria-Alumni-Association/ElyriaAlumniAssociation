@@ -5,69 +5,181 @@
 }
 
 <h1>View Alumni Information</h1>
+<br />
 
 <p>
     <a asp-action="Create" class="btn btn-danger">Create New</a>
 </p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Search Criteria (Filters Are Cumulative)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <form method="get" asp-action="Index">
-            <td>
+<br />
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h4>
+                    Search Criteria (filters are cumulative):
+                </h4> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="First Name" name="firstNameSearch" value="@ViewData["FirstNameFilter"]" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="City" name="citySearch" value="@ViewData["CityFilter"]" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="Graduation Years Start" name="graduationYearStartSearch" id="GraduationStart" value="@ViewData["GraduationStartFilter"]" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="Last Name" name="lastNameSearch" value="@ViewData["LastNameFilter"]" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="State" name="stateSearch" value="@ViewData["StateFilter"]" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="Graduation Years End" name="graduationYearEndSearch" id="GraduationEnd" value="@ViewData["GraduationEndFilter"]" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
                 
-                    <p>
-                    <input type="search" placeholder="First Name" name="firstNameSearch" value="@ViewData["FirstNameFilter"]"/>
-                    </p>
-                    <p>
-                    <input type="search" placeholder="Last Name" name="lastNameSearch" value="@ViewData["LastNameFilter"]" />
-                    </p>
-            </td>
-            <td>
-                <p>
-                    <input type="search" placeholder="City" name="citySearch" value="@ViewData["CityFilter"]" />
-                </p>
-            </td>
-            <td>
-                <p>
-                    <input type="search" placeholder="Graduation Years Start" name="graduationYearStartSearch" id="GraduationStart" value="@ViewData["GraduationStartFilter"]" />
-                </p>
-                <p>
-                    <input type="search" placeholder="Graduation Years End" name="graduationYearEndSearch" id="GraduationEnd" value="@ViewData["GraduationEndFilter"]" />
-                </p>
-                <p>
-                    <input type="search" placeholder="School Attended" name="schoolSearch" value="@ViewData["SchoolFilter"]" />
-                </p>
-            </td>
-            <td>
-                @if(ViewData["ScholasticFilter"].Equals(true)){
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="Country" name="countrySearch" value="@ViewData["CountryFilter"]" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="School Attended" name="schoolSearch" value="@ViewData["SchoolFilter"]" />
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-4 mb-3">
+                
+            </div>
+            <div class="col-md-4 mb-3">
+               
+            </div>
+            <div class="col-md-4 mb-3">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                @if (ViewData["ScholasticFilter"].Equals(true))
+                        {
                     <label class="form-check-label">
                         <input type="checkbox" checked="checked" name="scholasticSearch" value="true" /> Scholastic Award
                     </label>
-                } else {
+                        }
+                        else
+                        {
                     <label class="form-check-label">
                         <input type="checkbox" name="scholasticSearch" value="true" /> Scholastic Award
                     </label>
+                        }
+                        @if (ViewData["AthleticsFilter"].Equals(true))
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="athleticsSearch" value="true" /> Athletics
+                    </label>
+                        }
+                        else
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="athleticsSearch" value="true" /> Athletics
+                    </label>
+                        }
+                        @if (ViewData["TheatreFilter"].Equals(true))
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="theatreSearch" value="true" /> Theatre
+                    </label>
+                        }
+                        else
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="theatreSearch" value="true" /> Theatre
+                    </label>
+                        }
+					@if (ViewData["BandFilter"].Equals(true))
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="bandSearch" value="true" /> Band
+                    </label>
+                        }
+                        else
+                        {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="bandSearch" value="true" /> Band
+                    </label>
+                        }
+            </div>
+            <div class="col-md-4 mb-3">
+                @if (ViewData["ChoirFilter"].Equals(true))
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="choirSearch" value="true" /> Choir
+                    </label>
                 }
-            </td>
-            <tr>
-                <td>
-                <input type="submit" class="btn btn-secondary" value="Apply Filters" />
-                </td>
-            <td>
+                else
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="choirSearch" value="true" /> Choir
+                    </label>
+                }
+                @if (ViewData["ClubsFilter"].Equals(true))
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="clubsSearch" value="true" /> Clubs
+                    </label>
+                }
+                else
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="clubsSearch" value="true" /> Clubs
+                    </label>
+                }
+                @if (ViewData["ClassOfficerFilter"].Equals(true))
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="classOfficerSearch" value="true" /> Class Officer
+                    </label>
+                }
+                else
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="classOfficerSearch" value="true" /> ClassOfficer
+                    </label>
+                }
+                @if (ViewData["ROTCFilter"].Equals(true))
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" checked="checked" name="rotcSearch" value="true" /> ROTC
+                    </label>
+                }
+                else
+                {
+                    <label class="form-check-label">
+                        <input type="checkbox" name="rotcSearch" value="true" /> ROTC
+                    </label>
+                }
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="search" placeholder="Other Activities" name="otherSearch" value="@ViewData["OtherFilter"]" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <button type="submit" class="btn btn-secondary">Apply Filters</button>
+            </div>
+            <div class="col-md-6 mb-3">
                 <a asp-action="Index" class="btn btn-dark">Clear Filters</a>
-            </td>
-            </tr>
-            </form>
-    </tbody>
-</table>
+            </div>
+        </div>
+    </form>
+</div>
+
 <form asp-controller="Alumni" method="post">
     <table class="table">
         <thead>

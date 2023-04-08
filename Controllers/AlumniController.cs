@@ -54,7 +54,8 @@ namespace ElyriaAlumniAssociation.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Index(string sortOrder, string firstNameSearch, string lastNameSearch, string schoolSearch, string graduationYearStartSearch, string graduationYearEndSearch,
-            string citySearch, string stateSearch, string countrySearch, bool scholasticSearch)
+            string citySearch, string stateSearch, string countrySearch, bool scholasticSearch, bool athleticsSearch, bool theatreSearch, bool bandSearch, bool choirSearch, bool clubsSearch,
+            bool classOfficerSearch, bool rotcSearch, string otherSearch)
         {
             var results = await _context.Alumnus.ToListAsync();
 
@@ -71,10 +72,18 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["SchoolFilter"] = schoolSearch;
             ViewData["GraduationStartFilter"] = graduationYearStartSearch;
             ViewData["GraduationEndFilter"] = graduationYearEndSearch;
-            ViewData["CityFilter"] = firstNameSearch;
-            ViewData["LastNameFilter"] = lastNameSearch;
-            ViewData["SchoolFilter"] = schoolSearch;
+            ViewData["CityFilter"] = citySearch;
+            ViewData["StateFilter"] = stateSearch;
+            ViewData["CountryFilter"] = countrySearch;
             ViewData["ScholasticFilter"] = scholasticSearch;
+            ViewData["AthleticsFilter"] = athleticsSearch;
+            ViewData["TheatreFilter"] = theatreSearch;
+            ViewData["BandFilter"] = bandSearch;
+            ViewData["ChoirFilter"] = choirSearch;
+            ViewData["ClubsFilter"] = clubsSearch;
+            ViewData["ClassOfficerFilter"] = classOfficerSearch;
+            ViewData["ROTCFilter"] = rotcSearch;
+            ViewData["OtherFilter"] = otherSearch;
 
             switch (sortOrder)
             {
@@ -122,46 +131,10 @@ namespace ElyriaAlumniAssociation.Controllers
                     break;
             }
 
-
-            if (!String.IsNullOrEmpty(firstNameSearch))
-            {
-                firstNameSearch = firstNameSearch.ToUpper();
-                results= results.Where(x => x.FirstName.ToUpper().Contains(firstNameSearch)).ToList();
-            }
-            if (!String.IsNullOrEmpty(lastNameSearch))
-            {
-                lastNameSearch = lastNameSearch.ToUpper();
-                results = results.Where(x => x.LastName.ToUpper().Contains(lastNameSearch)).ToList();
-            }
-            if (!String.IsNullOrEmpty(schoolSearch))
-            {
-                schoolSearch = schoolSearch.ToUpper();
-                results = results.Where(x => x.School.ToUpper().Contains(schoolSearch)).ToList();
-            }
-            if (!String.IsNullOrEmpty(graduationYearStartSearch) || !String.IsNullOrEmpty(graduationYearEndSearch))
-            {
-                var startYear = 1900;
-                string year = DateTime.Now.Year.ToString();
-                var endYear = Convert.ToInt32(year, 10);
-
-                if (!String.IsNullOrEmpty(graduationYearStartSearch))
-                {
-                    startYear = int.Parse(graduationYearStartSearch);
-                }
-
-                if (!String.IsNullOrEmpty(graduationYearEndSearch))
-                {
-                    endYear = int.Parse(graduationYearEndSearch);
-                }
-
-
-                results = results.Where(x => x.GraduationYear >= startYear &&  x.GraduationYear <= endYear).ToList();
-            }
-            if (scholasticSearch)
-            {
-                results = results.Where(x => x.ScholasticAward == scholasticSearch).ToList();
-            }
-
+            results = filter(results, firstNameSearch, lastNameSearch, schoolSearch, graduationYearStartSearch, graduationYearEndSearch,
+            citySearch, stateSearch, countrySearch, scholasticSearch, athleticsSearch, theatreSearch, bandSearch, choirSearch, clubsSearch,
+            classOfficerSearch, rotcSearch, otherSearch);
+            
             return View(results);
         }
 
@@ -367,6 +340,114 @@ namespace ElyriaAlumniAssociation.Controllers
         private bool AlumnusExists(int id)
         {
           return (_context.Alumnus?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private List<Alumnus> filter(List<Alumnus> results, string firstNameSearch, string lastNameSearch, string schoolSearch, string graduationYearStartSearch, string graduationYearEndSearch,
+            string citySearch, string stateSearch, string countrySearch, bool scholasticSearch, bool athleticsSearch, bool theatreSearch, bool bandSearch, bool choirSearch, bool clubsSearch,
+            bool classOfficerSearch, bool rotcSearch, string otherSearch)
+        {
+            if (!String.IsNullOrEmpty(firstNameSearch))
+            {
+                firstNameSearch = firstNameSearch.ToUpper();
+                results = results.Where(x => x.FirstName.ToUpper().Contains(firstNameSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(lastNameSearch))
+            {
+                lastNameSearch = lastNameSearch.ToUpper();
+                results = results.Where(x => x.LastName.ToUpper().Contains(lastNameSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(schoolSearch))
+            {
+                schoolSearch = schoolSearch.ToUpper();
+                results = results.Where(x => x.School.ToUpper().Contains(schoolSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(graduationYearStartSearch) || !String.IsNullOrEmpty(graduationYearEndSearch))
+            {
+                var startYear = 1900;
+                string year = DateTime.Now.Year.ToString();
+                var endYear = Convert.ToInt32(year, 10);
+
+                if (!String.IsNullOrEmpty(graduationYearStartSearch))
+                {
+                    try
+                    {
+                        startYear = int.Parse(graduationYearStartSearch);
+                    }
+                    catch
+                    {
+                        startYear = 1900;
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(graduationYearEndSearch))
+                {
+                    try
+                    {
+                        endYear = int.Parse(graduationYearEndSearch);
+                    }
+                    catch
+                    {
+                        endYear = Convert.ToInt32(year, 10);
+                    }
+                }
+
+
+                results = results.Where(x => x.GraduationYear >= startYear && x.GraduationYear <= endYear).ToList();
+            }
+            if (!String.IsNullOrEmpty(citySearch))
+            {
+                citySearch = citySearch.ToUpper();
+                results = results.Where(x => x.City.ToUpper().Contains(citySearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(stateSearch))
+            {
+                stateSearch = stateSearch.ToUpper();
+                results = results.Where(x => x.State.ToUpper().Contains(stateSearch)).ToList();
+            }
+            if (!String.IsNullOrEmpty(countrySearch))
+            {
+                countrySearch = countrySearch.ToUpper();
+                results = results.Where(x => x.Country.ToUpper().Contains(countrySearch)).ToList();
+            }
+            if (scholasticSearch)
+            {
+                results = results.Where(x => x.ScholasticAward == scholasticSearch).ToList();
+            }
+            if (athleticsSearch)
+            {
+                results = results.Where(x => x.Athletics == athleticsSearch).ToList();
+            }
+            if (theatreSearch)
+            {
+                results = results.Where(x => x.Theatre == theatreSearch).ToList();
+            }
+            if (bandSearch)
+            {
+                results = results.Where(x => x.Band == bandSearch).ToList();
+            }
+            if (choirSearch)
+            {
+                results = results.Where(x => x.Choir == choirSearch).ToList();
+            }
+            if (clubsSearch)
+            {
+                results = results.Where(x => x.Clubs == clubsSearch).ToList();
+            }
+            if (classOfficerSearch)
+            {
+                results = results.Where(x => x.ClassOfficer == classOfficerSearch).ToList();
+            }
+            if (rotcSearch)
+            {
+                results = results.Where(x => x.ROTC == rotcSearch).ToList();
+            }
+            if (!String.IsNullOrEmpty(otherSearch))
+            {
+                otherSearch = otherSearch.ToUpper();
+                results = results.Where(x => x.OtherActivities == otherSearch).ToList();
+            }
+
+            return results;
         }
     }
 
