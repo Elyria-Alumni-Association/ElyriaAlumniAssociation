@@ -1,0 +1,139 @@
+﻿@model IList<ElyriaAlumniAssociation.Models.DeletedAlumnus>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Deleted Alumni</h1>
+
+<form asp-controller="Alumni" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="allcheck" id="selectAll" /> Select All
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstNameSortParam"]">First Name</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">Last Name</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]">School</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]">Graduation Year</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]">City</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]">State</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]">Country</a>
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        <input asp-for="@Model[i].Selected" value="true" type="checkbox" />
+                        <input asp-for="@Model[i].Id" type="hidden" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].School)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].GraduationYear)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => Model[i].City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => Model[i].Country)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Delete Selected
+        </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
+            Export Selected
+        </button>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to delete the selected entries? They will be permanently deleted</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" asp-action="DeleteAlumni" class="btn btn-warning">Delete Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Export</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>The selected records will be exported to a .csv file and emailed to the logged in user's email address.'</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" asp-action="Export" class="btn btn-success">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+             $(function (){
+            $("#selectAll").click(function (){
+                $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+            });
+            $("input[type=checkbox]").click(function () {
+                if(!$(this).prop("checked")) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        })
+    </script>
+}

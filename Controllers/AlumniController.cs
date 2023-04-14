@@ -23,12 +23,13 @@ namespace ElyriaAlumniAssociation.Controllers
     public class AlumniController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly DeletedAlumnusDbContext _deletedContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<AlumniController> _logger;
         private readonly IEmailSender _emailSender;
 
         public AlumniController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            DeletedAlumnusDbContext deletedContext,
             ILogger<AlumniController> logger,
             IEmailSender emailSender)
         {
@@ -36,6 +37,7 @@ namespace ElyriaAlumniAssociation.Controllers
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _deletedContext = deletedContext;
         }
 
         // GET: Alumni
@@ -272,11 +274,19 @@ namespace ElyriaAlumniAssociation.Controllers
                 return Problem("Entity set 'ApplicationDbContext.Alumnus'  is null.");
             }
             var alumnus = await _context.Alumnus.FindAsync(id);
+            var deletedAlumnus = ConvertAlumnusToDeletedAlumnus(alumnus);
+
+            if(deletedAlumnus != null)
+            {
+                _deletedContext.DeletedAlumnus.Add(deletedAlumnus);
+            }
+
             if (alumnus != null)
             {
                 _context.Alumnus.Remove(alumnus);
             }
-            
+
+            await _deletedContext.SaveChangesAsync();
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -291,11 +301,14 @@ namespace ElyriaAlumniAssociation.Controllers
             {
                 if (alumnus.Selected)
                 {
-                    alumniToDelete.Add(alumnus);
+                    var foundAlumnus = await _context.Alumnus.FirstOrDefaultAsync(x => x.Id == alumnus.Id);
+                    var deletedAlumnus = ConvertAlumnusToDeletedAlumnus(foundAlumnus);
+                    _deletedContext.DeletedAlumnus.Add(deletedAlumnus);
+                    _context.Alumnus.Remove(_context.Alumnus.Find(alumnus.Id));
                 }
             }
 
-            _context.Alumnus.RemoveRange(alumniToDelete);
+            await _deletedContext.SaveChangesAsync();
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -448,6 +461,68 @@ namespace ElyriaAlumniAssociation.Controllers
             }
 
             return results;
+        }
+
+        private DeletedAlumnus ConvertAlumnusToDeletedAlumnus(Alumnus alumnus)
+        {
+            DeletedAlumnus deletedAlumnus = new DeletedAlumnus();
+            deletedAlumnus.FirstName = alumnus.FirstName;
+            deletedAlumnus.LastName = alumnus.LastName;
+            deletedAlumnus.MiddleInitial = alumnus.MiddleInitial;
+            deletedAlumnus.LastNameAtGraduation = alumnus.LastNameAtGraduation;
+            deletedAlumnus.School = alumnus.School;
+            deletedAlumnus.GraduationYear = alumnus.GraduationYear;
+            deletedAlumnus.StreetAddress = alumnus.StreetAddress;
+            deletedAlumnus.City = alumnus.City;
+            deletedAlumnus.State = alumnus.State;
+            deletedAlumnus.Country = alumnus.Country;
+            deletedAlumnus.PostalCode = alumnus.PostalCode;
+            deletedAlumnus.EmailAddress = alumnus.EmailAddress;
+            deletedAlumnus.PhoneNumber = alumnus.PhoneNumber;
+            deletedAlumnus.ScholasticAward = alumnus.ScholasticAward;
+            deletedAlumnus.Athletics = alumnus.Athletics;
+            deletedAlumnus.Theatre = alumnus.Theatre;
+            deletedAlumnus.Band = alumnus.Band;
+            deletedAlumnus.Choir = alumnus.Choir;
+            deletedAlumnus.Clubs = alumnus.Clubs;
+            deletedAlumnus.ClassOfficer = alumnus.ClassOfficer;
+            deletedAlumnus.ROTC = alumnus.ROTC;
+            deletedAlumnus.OtherActivities = alumnus.OtherActivities;
+            deletedAlumnus.CurrentStatus = alumnus.CurrentStatus;
+            deletedAlumnus.Selected = false;
+
+            return deletedAlumnus;
+        }
+
+        private Alumnus DuplicateAlumnus(Alumnus alumnus)
+        {
+            Alumnus duplicateAlumnus = new Alumnus();
+            duplicateAlumnus.FirstName = alumnus.FirstName;
+            duplicateAlumnus.LastName = alumnus.LastName;
+            duplicateAlumnus.MiddleInitial = alumnus.MiddleInitial;
+            duplicateAlumnus.LastNameAtGraduation = alumnus.LastNameAtGraduation;
+            duplicateAlumnus.School = alumnus.School;
+            duplicateAlumnus.GraduationYear = alumnus.GraduationYear;
+            duplicateAlumnus.StreetAddress = alumnus.StreetAddress;
+            duplicateAlumnus.City = alumnus.City;
+            duplicateAlumnus.State = alumnus.State;
+            duplicateAlumnus.Country = alumnus.Country;
+            duplicateAlumnus.PostalCode = alumnus.PostalCode;
+            duplicateAlumnus.EmailAddress = alumnus.EmailAddress;
+            duplicateAlumnus.PhoneNumber = alumnus.PhoneNumber;
+            duplicateAlumnus.ScholasticAward = alumnus.ScholasticAward;
+            duplicateAlumnus.Athletics = alumnus.Athletics;
+            duplicateAlumnus.Theatre = alumnus.Theatre;
+            duplicateAlumnus.Band = alumnus.Band;
+            duplicateAlumnus.Choir = alumnus.Choir;
+            duplicateAlumnus.Clubs = alumnus.Clubs;
+            duplicateAlumnus.ClassOfficer = alumnus.ClassOfficer;
+            duplicateAlumnus.ROTC = alumnus.ROTC;
+            duplicateAlumnus.OtherActivities = alumnus.OtherActivities;
+            duplicateAlumnus.CurrentStatus = alumnus.CurrentStatus;
+            duplicateAlumnus.Selected = false;
+
+            return duplicateAlumnus;
         }
     }
 

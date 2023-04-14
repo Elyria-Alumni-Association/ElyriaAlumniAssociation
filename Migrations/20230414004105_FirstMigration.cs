@@ -37,7 +37,8 @@ namespace ElyriaAlumniAssociation.Migrations
                     ClassOfficer = table.Column<bool>(type: "bit", nullable: false),
                     ROTC = table.Column<bool>(type: "bit", nullable: false),
                     OtherActivities = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CurrentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CurrentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

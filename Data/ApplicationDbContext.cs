@@ -10,6 +10,8 @@ namespace ElyriaAlumniAssociation.Data
             : base(options)
         {
         }
-        public DbSet<ElyriaAlumniAssociation.Models.Alumnus>? Alumnus { get; set; }
+        public DbSet<DeletedAlumnus>? DeletedAlumnus { get; set; }
+        public DbSet<Alumnus>? Alumnus { get; set; }
+
     }
 }

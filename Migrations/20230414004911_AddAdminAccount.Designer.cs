@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElyriaAlumniAssociation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230407193344_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230414004911_AddAdminAccount")]
+    partial class AddAdminAccount
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,10 @@ namespace ElyriaAlumniAssociation.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("CurrentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -124,6 +128,8 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Alumnus");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Alumnus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -326,6 +332,13 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ElyriaAlumniAssociation.Models.DeletedAlumnus", b =>
+                {
+                    b.HasBaseType("ElyriaAlumniAssociation.Models.Alumnus");
+
+                    b.HasDiscriminator().HasValue("DeletedAlumnus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -59,6 +59,10 @@ namespace ElyriaAlumniAssociation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(55)
@@ -122,6 +126,8 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Alumnus");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Alumnus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -324,6 +330,13 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ElyriaAlumniAssociation.Models.DeletedAlumnus", b =>
+                {
+                    b.HasBaseType("ElyriaAlumniAssociation.Models.Alumnus");
+
+                    b.HasDiscriminator().HasValue("DeletedAlumnus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
