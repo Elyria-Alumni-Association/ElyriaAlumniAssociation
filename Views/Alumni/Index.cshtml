@@ -259,6 +259,7 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
             Export Selected
         </button>
+        <a class="btn btn-primary" asp-area="" asp-controller="DeletedAlumni" asp-action="Index">Recover Data</a>
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -268,7 +269,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h4>Are you sure you want to delete the selected entries? They will be permanently deleted</h4>
+                    <h4>Are you sure you want to delete the selected entries?</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

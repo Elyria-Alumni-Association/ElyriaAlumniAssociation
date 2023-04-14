@@ -14,25 +14,25 @@
                     <input type="checkbox" name="allcheck" id="selectAll" /> Select All
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstNameSortParam"]">First Name</a>
+                    <a asp-action="Index">First Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">Last Name</a>
+                    <a asp-action="Index" >Last Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]">School</a>
+                    <a asp-action="Index" >School</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]">Graduation Year</a>
+                    <a asp-action="Index" >Graduation Year</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]">City</a>
+                    <a asp-action="Index" >City</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]">State</a>
+                    <a asp-action="Index" >State</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]">Country</a>
+                    <a asp-action="Index" >Country</a>
                 </th>
 
                 <th></th>
@@ -70,7 +70,6 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
                         <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
                     </td>
