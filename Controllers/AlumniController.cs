@@ -63,7 +63,6 @@ namespace ElyriaAlumniAssociation.Controllers
             bool currentScholasticFilter, bool currentAthleticsFilter, bool currentTheatreFilter, bool currentBandFilter, bool currentChoirFilter, bool currentClubsFilter,
             bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter, int? pageNumber)
         {
-            var results = await _context.Alumnus.ToListAsync();
 
             ViewData["CurrentSort"] = sortOrder;
             ViewData["LastNameSortParam"] = sortOrder == "last_name" ? "last_name_desc" : "last_name";
@@ -73,6 +72,33 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["CitySortParam"] = sortOrder == "city" ? "city_desc" : "city";
             ViewData["StateSortParam"] = sortOrder == "state" ? "state_desc" : "state";
             ViewData["CountrySortParam"] = sortOrder == "country" ? "country_desc" : "country";
+
+            if (otherSearch != null || firstNameSearch != null || lastNameSearch != null || schoolSearch != null || graduationYearStartSearch != null || graduationYearEndSearch != null
+                || citySearch != null || stateSearch != null || countrySearch != null || scholasticSearch || athleticsSearch || theatreSearch || bandSearch || choirSearch
+                || clubsSearch || classOfficerSearch || rotcSearch)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                firstNameSearch = currentFirstNameFilter;
+                lastNameSearch = currentLastNameFilter;
+                schoolSearch = currentSchoolFilter;
+                graduationYearStartSearch = currentGraduationYearStartFilter;
+                graduationYearEndSearch = currentGraduationYearEndFilter;
+                citySearch = currentCityFilter;
+                stateSearch = currentStateFilter;
+                countrySearch = currentCountryFilter;
+                scholasticSearch = currentScholasticFilter;
+                athleticsSearch = currentAthleticsFilter;
+                theatreSearch = currentTheatreFilter;
+                bandSearch = currentBandFilter;
+                choirSearch = currentChoirFilter;
+                clubsSearch = currentClubsFilter;
+                classOfficerSearch = currentClassOfficerFilter;
+                rotcSearch = currentRotcFilter;
+                otherSearch = currentOtherFilter;
+            }
 
             ViewData["FirstNameFilter"] = firstNameSearch;
             ViewData["LastNameFilter"] = lastNameSearch;
@@ -92,32 +118,7 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["ROTCFilter"] = rotcSearch;
             ViewData["OtherFilter"] = otherSearch;
 
-            if (otherSearch != null || firstNameSearch != null || lastNameSearch != null || schoolSearch != null || graduationYearStartSearch != null || graduationYearEndSearch != null 
-                || citySearch != null || stateSearch != null || countrySearch != null || scholasticSearch || athleticsSearch || theatreSearch || bandSearch || choirSearch
-                || clubsSearch || classOfficerSearch || rotcSearch)
-            {
-                pageNumber = 1;
-            }
-            else {
-                firstNameSearch = currentFirstNameFilter;
-                lastNameSearch = currentLastNameFilter;
-                schoolSearch = currentSchoolFilter;
-                graduationYearStartSearch = currentGraduationYearStartFilter;
-                graduationYearEndSearch = currentGraduationYearEndFilter;
-                citySearch = currentCityFilter;
-                stateSearch = currentStateFilter;
-                countrySearch = currentCountryFilter;
-                scholasticSearch = currentScholasticFilter;
-                athleticsSearch = currentAthleticsFilter;
-                theatreSearch = currentTheatreFilter;
-                bandSearch = currentBandFilter;
-                choirSearch = currentChoirFilter;
-                clubsSearch = currentClubsFilter;
-                classOfficerSearch = currentClassOfficerFilter;
-                rotcSearch = currentRotcFilter;
-                otherSearch = currentOtherFilter;
-            }
-           
+            var results = await _context.Alumnus.ToListAsync();
 
             switch (sortOrder)
             {
@@ -170,7 +171,7 @@ namespace ElyriaAlumniAssociation.Controllers
             classOfficerSearch, rotcSearch, otherSearch);
 
             int pageSize = 3;
-            return View(await PaginatedList<Alumnus>.CreateAsync(results, pageNumber ?? 1, pageSize));
+            return View(PaginatedList<Alumnus>.Create(results, pageNumber ?? 1, pageSize));
         }
 
         // GET: Alumni/Details/5

@@ -188,25 +188,81 @@
                     <input type="checkbox" name="allcheck" id="selectAll" /> Select All
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstNameSortParam"]">First Name</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["FirstNameSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">First Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">Last Name</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Last Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]">School</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">School</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]">Graduation Year</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Graduation Year </a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]">City</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">City</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]">State</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">State</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]">Country</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                       asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                       asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                       asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                       asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                       asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                       asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                       asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Country</a>
                 </th>
 
                 <th></th>
@@ -306,14 +362,30 @@
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+   asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+   asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+   asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+   asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+   asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+   asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+   asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+   asp-route-currentOtherFilter="@ViewData["OtherFilter"]"
    class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+   asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+   asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+   asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+   asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+   asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+   asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+   asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+   asp-route-currentOtherFilter="@ViewData["OtherFilter"]"
    class="btn btn-default @nextDisabled">
     Next
 </a>
