@@ -1,2 +1,3 @@
-Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus,Selected
-6,Test,Test,,,Elyria,2002,Street 123,Test,USA,44011,test@test.com,123456789,False,True,False,True,False,False,False,True,,Employed,False
+Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,State,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus,Selected
+9,Michael,Lengen,G,,Elyria,2004,36273 Falcon Crest Avenue,Avon,United States,OH,44011,lengen.6@gmail.com,4406574915,True,False,False,True,False,True,False,False,,Employed,False
+10,Test,Test,,Test,Elyria,1918,Test 123,Test,Test,Test,123456,test@test.com,1234567890,False,True,False,False,True,False,True,False,Test,Retired,False

@@ -1,4 +1,4 @@
-﻿@model IList<ElyriaAlumniAssociation.Models.Alumnus>
+﻿@model ElyriaAlumniAssociation.Utils.PaginatedList<ElyriaAlumniAssociation.Models.Alumnus>
 
 @{
     ViewData["Title"] = "Index";
@@ -217,7 +217,7 @@
             {
                 <tr>
                     <td>
-                        <input asp-for="@Model[i].Selected" value="true" type="checkbox" />
+                        <input asp-for="@Model[i].Selected" value="true" type="checkbox" class="selected" />
                         <input asp-for="@Model[i].Id" type="hidden"/>
                     </td>
                     <td>
@@ -298,13 +298,33 @@
     </div>
 </form>
 
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
 @section scripts{
     <script>
              $(function (){
             $("#selectAll").click(function (){
-                $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+                $("input[class=selected]").prop('checked', $(this).prop('checked'));
             });
-            $("input[type=checkbox]").click(function () {
+            $("input[class=selected]").click(function () {
                 if(!$(this).prop("checked")) {
                     $("#selectAll").prop("checked", false);
                 }
