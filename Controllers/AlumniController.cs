@@ -170,8 +170,24 @@ namespace ElyriaAlumniAssociation.Controllers
             citySearch, stateSearch, countrySearch, scholasticSearch, athleticsSearch, theatreSearch, bandSearch, choirSearch, clubsSearch,
             classOfficerSearch, rotcSearch, otherSearch);
 
-            int pageSize = 3;
+            int pageSize = 50;
             return View(PaginatedList<Alumnus>.Create(results, pageNumber ?? 1, pageSize));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni)
+        {
+
+            foreach (Alumnus alumnus in alumni)
+            {
+                var foundAlumnus = await _context.Alumnus.FirstOrDefaultAsync(x => x.Id == alumnus.Id);
+                foundAlumnus.Selected = alumnus.Selected;
+                _context.Alumnus.Update(_context.Alumnus.Find(foundAlumnus.Id));
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // GET: Alumni/Details/5
