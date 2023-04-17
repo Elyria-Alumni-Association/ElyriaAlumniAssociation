@@ -315,7 +315,7 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
             Export Selected
         </button>
-        <button type="submit" class="btn btn-secondary" asp-action="SaveSelected">
+        <button type="submit" class="btn btn-secondary" asp-action="SaveSelected" asp-route-pageNumber = "@Model.PageIndex">
             Save Selected (clears filters)
         </button>
         <a class="btn btn-primary" asp-area="" asp-controller="DeletedAlumni" asp-action="Index">Recover Data</a>

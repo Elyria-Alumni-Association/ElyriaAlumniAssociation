@@ -176,7 +176,7 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni)
+        public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni, int? pageNumber)
         {
 
             foreach (Alumnus alumnus in alumni)
@@ -187,7 +187,7 @@ namespace ElyriaAlumniAssociation.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {pageNumber = pageNumber});
         }
 
         // GET: Alumni/Details/5
