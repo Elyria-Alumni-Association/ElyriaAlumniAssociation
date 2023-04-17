@@ -170,7 +170,7 @@ namespace ElyriaAlumniAssociation.Controllers
             citySearch, stateSearch, countrySearch, scholasticSearch, athleticsSearch, theatreSearch, bandSearch, choirSearch, clubsSearch,
             classOfficerSearch, rotcSearch, otherSearch);
 
-            int pageSize = 50;
+            int pageSize = 5;
             return View(PaginatedList<Alumnus>.Create(results, pageNumber ?? 1, pageSize));
         }
 
@@ -344,8 +344,9 @@ namespace ElyriaAlumniAssociation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> DeleteAlumni(List<Alumnus>? alumni)
+        public async Task<IActionResult> DeleteAlumni()
         {
+            List<Alumnus> alumni = await _context.Alumnus.ToListAsync();
             List<Alumnus> alumniToDelete = new List<Alumnus>();
             foreach (var alumnus in alumni)
             {
@@ -366,18 +367,18 @@ namespace ElyriaAlumniAssociation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Export(List<Alumnus>? alumni)
+        public async Task<IActionResult> Export()
         {
+            List<Alumnus> alumni = await _context.Alumnus.ToListAsync();
             List<Alumnus> alumniToExport = new List<Alumnus>();
             foreach (var alumnus in alumni)
             {
                 if (alumnus.Selected)
                 {
                     var foundAlumnus = await _context.Alumnus.FirstOrDefaultAsync(x => x.Id == alumnus.Id);
-                    if(foundAlumnus != null)
-                    {
-                        alumniToExport.Add(foundAlumnus);
-                    }
+                 
+                    alumniToExport.Add(foundAlumnus);
+                   
                 }
             }
 

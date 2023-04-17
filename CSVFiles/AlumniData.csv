@@ -1,3 +1,6 @@
 Id,FirstName,LastName,MiddleInitial,LastNameAtGraduation,School,GraduationYear,StreetAddress,City,Country,State,PostalCode,EmailAddress,PhoneNumber,ScholasticAward,Athletics,Theatre,Band,Choir,Clubs,ClassOfficer,ROTC,OtherActivities,CurrentStatus,Selected
-9,Michael,Lengen,G,,Elyria,2004,36273 Falcon Crest Avenue,Avon,United States,OH,44011,lengen.6@gmail.com,4406574915,True,False,False,True,False,True,False,False,,Employed,False
-10,Test,Test,,Test,Elyria,1918,Test 123,Test,Test,Test,123456,test@test.com,1234567890,False,True,False,False,True,False,True,False,Test,Retired,False
+26,Xiao,Liu,L,,Elyria,1918,Building 3839 Hanghai Donglu and 21st street ZTE New Port JinKai Distict,Zhengzhou,China,OH,450000,lengen.6@gmail.com,+8618703970090,True,False,False,True,False,False,False,True,,Employed,True
+27,Isaac,Test,,,Elyria,1906,Test,Test,Test,Test,123456,test@test.com,123456789,False,False,True,False,False,True,False,True,,Employed,True
+28,Ii,test,,,Elyria,1978,1234 Test,Test,Test,Test,12345,terst@test.com,123456578,False,True,False,True,False,False,True,False,,Employed,True
+29,iii,test,t,test,Elyria,1987,test,terst,test,test,123456,test@test.com,123456789,False,True,False,False,True,False,False,True,,Employed,True
+30,Michael,Lengen,G,,Elyria,2004,36273 Falcon Crest Avenue,Avon,United States,OH,44011,lengen.6@gmail.com,4406574915,True,False,False,True,False,True,False,False,,Employed,True
