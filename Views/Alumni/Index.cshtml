@@ -315,8 +315,19 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
             Export Selected
         </button>
-        <button type="submit" class="btn btn-secondary" asp-action="SaveSelected" asp-route-pageNumber = "@Model.PageIndex">
-            Save Selected (clears filters)
+        <button type="submit" class="btn btn-secondary" asp-action="SaveSelected" asp-route-pageNumber = "@Model.PageIndex"
+                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                asp-route-pageNumber="@(Model.PageIndex - 1)"
+                asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
+                asp-route-currentSchoolFilter="@ViewData["SchoolFilter"]" asp-route-currentGraduationYearStartFilter="@ViewData["GraduationStartFilter"]"
+                asp-route-currentGraduationYearEndFilter="@ViewData["GraduationEndFilter"]" asp-route-currentCityFilter="@ViewData["CityFilter"]"
+                asp-route-currentStateFilter="@ViewData["StateFilter"]" asp-route-currentCountryFilter="@ViewData["CountryFilter"]"
+                asp-route-currentScholasticFilter="@ViewData["ScholasticFilter"]" asp-route-currentAthleticsFilter="@ViewData["AthleticsFilter"]"
+                asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
+                asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
+                asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
+                asp-route-currentOtherFilter="@ViewData["OtherFilter"]">
+            Save Selected
         </button>
         <a class="btn btn-primary" asp-area="" asp-controller="DeletedAlumni" asp-action="Index">Recover Data</a>
     </div>

@@ -18,6 +18,7 @@ using CsvHelper.Configuration;
 using ElyriaAlumniAssociation.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ElyriaAlumniAssociation.Utils;
+using Microsoft.Data.SqlClient;
 
 namespace ElyriaAlumniAssociation.Controllers
 {
@@ -176,7 +177,10 @@ namespace ElyriaAlumniAssociation.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni, int? pageNumber)
+        public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni, int? pageNumber, string sortOrder, string currentFirstNameFilter, string currentLastNameFilter, string currentSchoolFilter,
+            string currentGraduationYearStartFilter, string currentGraduationYearEndFilter, string currentCityFilter, string currentStateFilter, string currentCountryFilter,
+            bool currentScholasticFilter, bool currentAthleticsFilter, bool currentTheatreFilter, bool currentBandFilter, bool currentChoirFilter, bool currentClubsFilter,
+            bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter)
         {
 
             foreach (Alumnus alumnus in alumni)
@@ -187,7 +191,11 @@ namespace ElyriaAlumniAssociation.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", new {pageNumber = pageNumber});
+            return RedirectToAction("Index", new { pageNumber = pageNumber, sortOrder = sortOrder, currentFirstNameFilter = currentFirstNameFilter, currentLastNameFilter = currentLastNameFilter,
+            currentSchoolFilter = currentSchoolFilter, currentGraduationYearStartFilter = currentGraduationYearStartFilter, currentGraduationYearEndFilter = currentGraduationYearEndFilter,
+            currentCityFilter = currentCityFilter, currentStateFilter = currentStateFilter, currentCountryFilter = currentCountryFilter, currentScholasticFilter = currentScholasticFilter,
+            currentAthleticsFilter = currentAthleticsFilter, currentTheatreFilter = currentTheatreFilter, currentBandFilter = currentBandFilter, currentChoirFilter = currentChoirFilter, 
+            currentClubsFilter = currentClubsFilter, currentClassOfficerFilter = currentClassOfficerFilter, currentRotcFilter = currentRotcFilter, currentOtherFilter = currentOtherFilter});
         }
 
         // GET: Alumni/Details/5
