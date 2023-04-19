@@ -62,7 +62,7 @@ namespace ElyriaAlumniAssociation.Controllers
             bool choirSearch, bool clubsSearch,bool classOfficerSearch, bool rotcSearch, string otherSearch, string currentFirstNameFilter, string currentLastNameFilter, string currentSchoolFilter, 
             string currentGraduationYearStartFilter, string currentGraduationYearEndFilter,string currentCityFilter, string currentStateFilter, string currentCountryFilter, 
             bool currentScholasticFilter, bool currentAthleticsFilter, bool currentTheatreFilter, bool currentBandFilter, bool currentChoirFilter, bool currentClubsFilter,
-            bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter, int? pageNumber)
+            bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter, int? pageNumber, int itemsPerPage, int currentItemsPerPageFilter)
         {
 
             ViewData["CurrentSort"] = sortOrder;
@@ -76,7 +76,7 @@ namespace ElyriaAlumniAssociation.Controllers
 
             if (otherSearch != null || firstNameSearch != null || lastNameSearch != null || schoolSearch != null || graduationYearStartSearch != null || graduationYearEndSearch != null
                 || citySearch != null || stateSearch != null || countrySearch != null || scholasticSearch || athleticsSearch || theatreSearch || bandSearch || choirSearch
-                || clubsSearch || classOfficerSearch || rotcSearch)
+                || clubsSearch || classOfficerSearch || rotcSearch || itemsPerPage != 0)
             {
                 pageNumber = 1;
             }
@@ -99,6 +99,7 @@ namespace ElyriaAlumniAssociation.Controllers
                 classOfficerSearch = currentClassOfficerFilter;
                 rotcSearch = currentRotcFilter;
                 otherSearch = currentOtherFilter;
+                itemsPerPage = currentItemsPerPageFilter;
             }
 
             ViewData["FirstNameFilter"] = firstNameSearch;
@@ -118,6 +119,7 @@ namespace ElyriaAlumniAssociation.Controllers
             ViewData["ClassOfficerFilter"] = classOfficerSearch;
             ViewData["ROTCFilter"] = rotcSearch;
             ViewData["OtherFilter"] = otherSearch;
+            ViewData["ItemsPerPageFilter"] = itemsPerPage;
 
             var results = await _context.Alumnus.ToListAsync();
 
@@ -171,7 +173,17 @@ namespace ElyriaAlumniAssociation.Controllers
             citySearch, stateSearch, countrySearch, scholasticSearch, athleticsSearch, theatreSearch, bandSearch, choirSearch, clubsSearch,
             classOfficerSearch, rotcSearch, otherSearch);
 
-            int pageSize = 5;
+            int pageSize;
+
+            if(itemsPerPage > 0)
+            {
+                pageSize = itemsPerPage;
+            }
+            else
+            {
+                pageSize = 5;
+            }
+
             return View(PaginatedList<Alumnus>.Create(results, pageNumber ?? 1, pageSize));
         }
 
@@ -180,7 +192,7 @@ namespace ElyriaAlumniAssociation.Controllers
         public async Task<IActionResult> SaveSelected(List<Alumnus>? alumni, int? pageNumber, string sortOrder, string currentFirstNameFilter, string currentLastNameFilter, string currentSchoolFilter,
             string currentGraduationYearStartFilter, string currentGraduationYearEndFilter, string currentCityFilter, string currentStateFilter, string currentCountryFilter,
             bool currentScholasticFilter, bool currentAthleticsFilter, bool currentTheatreFilter, bool currentBandFilter, bool currentChoirFilter, bool currentClubsFilter,
-            bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter)
+            bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter, int currentItemsPerPageFilter)
         {
 
             foreach (Alumnus alumnus in alumni)
@@ -195,7 +207,8 @@ namespace ElyriaAlumniAssociation.Controllers
             currentSchoolFilter = currentSchoolFilter, currentGraduationYearStartFilter = currentGraduationYearStartFilter, currentGraduationYearEndFilter = currentGraduationYearEndFilter,
             currentCityFilter = currentCityFilter, currentStateFilter = currentStateFilter, currentCountryFilter = currentCountryFilter, currentScholasticFilter = currentScholasticFilter,
             currentAthleticsFilter = currentAthleticsFilter, currentTheatreFilter = currentTheatreFilter, currentBandFilter = currentBandFilter, currentChoirFilter = currentChoirFilter, 
-            currentClubsFilter = currentClubsFilter, currentClassOfficerFilter = currentClassOfficerFilter, currentRotcFilter = currentRotcFilter, currentOtherFilter = currentOtherFilter});
+            currentClubsFilter = currentClubsFilter, currentClassOfficerFilter = currentClassOfficerFilter, currentRotcFilter = currentRotcFilter,
+                currentOtherFilter = currentOtherFilter, currentItemsPerPageFilter = currentItemsPerPageFilter});
         }
 
         // GET: Alumni/Details/5

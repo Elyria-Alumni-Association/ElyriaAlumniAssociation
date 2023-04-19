@@ -170,11 +170,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
                 <button type="submit" class="btn btn-secondary">Apply Filters</button>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
                 <a asp-action="Index" class="btn btn-dark">Clear Filters</a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <select name="itemsPerPage">
+                    @if (int.Parse(ViewData["ItemsPerPageFilter"].ToString()) != 0)
+                    {
+                      <option value="@ViewData["ItemsPerPageFilter"]">@ViewData["ItemsPerPageFilter"]</option>
+                    } else{
+                        <option value="5">5</option>
+                    }
+                    <option value=5>-- 5 --</option>
+                    <option value=10>-- 10 --</option>
+                    <option value=25>-- 25 --</option>
+                    <option value=50>-- 50 --</option>
+                    <option value=100>-- 100 --</option>
+                </select>
+                <button type="submit" >Entries Per Page</button>
             </div>
         </div>
     </form>
@@ -196,7 +212,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">First Name</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">First Name</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -207,7 +223,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Last Name</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">Last Name</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["SchoolSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -218,7 +234,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">School</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">School</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["GraduationSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -229,7 +245,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Graduation Year </a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">Graduation Year </a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -240,7 +256,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">City</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">City</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["StateSortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -251,7 +267,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">State</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">State</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]" asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -262,7 +278,7 @@
                        asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                        asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                        asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]">Country</a>
+                       asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">Country</a>
                 </th>
 
                 <th></th>
@@ -326,7 +342,7 @@
                 asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
                 asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
                 asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-                asp-route-currentOtherFilter="@ViewData["OtherFilter"]">
+                asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]">
             Save Selected
         </button>
         <a class="btn btn-primary" asp-area="" asp-controller="DeletedAlumni" asp-action="Index">Recover Data</a>
@@ -367,13 +383,16 @@
         </div>
     </div>
 </form>
+<br />
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
+<div class="row">
+    <div class="col-md-4">
+        <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFirstNameFilter="@ViewData["FirstNameFilter"]" asp-route-currentLastNameFilter="@ViewData["LastNameFilter"]"
@@ -384,7 +403,7 @@
    asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
    asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
    asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-   asp-route-currentOtherFilter="@ViewData["OtherFilter"]"
+           asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]"
    class="btn btn-default @prevDisabled">
     Previous
 </a>
@@ -399,11 +418,16 @@
    asp-route-currentTheatreFilter="@ViewData["TheatreFilter"]" asp-route-currentBandFilter="@ViewData["BandFilter"]"
    asp-route-currentChoirFilter="@ViewData["ChoirFilter"]" asp-route-currentClubsFilter="@ViewData["ClubsFilter"]"
    asp-route-currentClassOfficerFilter="@ViewData["ClassOfficerFilter"]" asp-route-currentRotcFilter="@ViewData["ROTCFilter"]"
-   asp-route-currentOtherFilter="@ViewData["OtherFilter"]"
+           asp-route-currentOtherFilter="@ViewData["OtherFilter"]" asp-route-currentItemsPerPageFilter="@ViewData["ItemsPerPageFilter"]"
    class="btn btn-default @nextDisabled">
     Next
 </a>
-
+</div>           
+</div>
+<div>
+    Page: @Model.PageIndex
+</div>
+              
 @section scripts{
     <script>
              $(function (){
