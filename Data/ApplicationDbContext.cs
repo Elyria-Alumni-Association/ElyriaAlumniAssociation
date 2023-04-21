@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ElyriaAlumniAssociation.Models;
+using ElyriaAlumniAssociation.Utils;
 
 namespace ElyriaAlumniAssociation.Data
 {

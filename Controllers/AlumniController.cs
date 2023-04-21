@@ -46,7 +46,7 @@ namespace ElyriaAlumniAssociation.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-
+           
             if (_context.Alumnus != null)
             {
                 return View(await _context.Alumnus.ToListAsync());
@@ -64,6 +64,9 @@ namespace ElyriaAlumniAssociation.Controllers
             bool currentScholasticFilter, bool currentAthleticsFilter, bool currentTheatreFilter, bool currentBandFilter, bool currentChoirFilter, bool currentClubsFilter,
             bool currentClassOfficerFilter, bool currentRotcFilter, string currentOtherFilter, int? pageNumber, int itemsPerPage, int currentItemsPerPageFilter)
         {
+            //Seeds Database uncomment to seed new entries.
+            //AlumnusSeeder seeder = new AlumnusSeeder();
+            //seeder.SeedAlumni(_context, 100);
 
             ViewData["CurrentSort"] = sortOrder;
             ViewData["LastNameSortParam"] = sortOrder == "last_name" ? "last_name_desc" : "last_name";
@@ -596,6 +599,7 @@ namespace ElyriaAlumniAssociation.Controllers
 
             return duplicateAlumnus;
         }
+       
     }
 
 }
