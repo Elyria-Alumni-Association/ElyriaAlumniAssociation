@@ -447,7 +447,7 @@ namespace ElyriaAlumniAssociation.Controllers
             if (!String.IsNullOrEmpty(schoolSearch))
             {
                 schoolSearch = schoolSearch.ToUpper();
-                results = results.Where(x => x.School.ToUpper().Contains(schoolSearch)).ToList();
+                results = results.Where(x => x.School.ToUpper().Equals(schoolSearch)).ToList();
             }
             if (!String.IsNullOrEmpty(graduationYearStartSearch) || !String.IsNullOrEmpty(graduationYearEndSearch))
             {

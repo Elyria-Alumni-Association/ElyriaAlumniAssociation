@@ -50,7 +50,11 @@
                 <input type="search" placeholder="Country" name="countrySearch" value="@ViewData["CountryFilter"]" />
             </div>
             <div class="col-md-4 mb-3">
-                <input type="search" placeholder="School Attended" name="schoolSearch" value="@ViewData["SchoolFilter"]" />
+                <select name="schoolSearch">
+                    <option value="@ViewData["SchoolFilter"]">@ViewData["SchoolFilter"]</option>
+                    <option value="Elyria">-- Elyria --</option>
+                    <option value="Elyria West">-- Elyria West --</option>
+                </select>
             </div>
         </div>
          <div class="row">

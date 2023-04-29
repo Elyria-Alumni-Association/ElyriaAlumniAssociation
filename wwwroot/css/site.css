@@ -27,3 +27,40 @@ body {
 a{
     color:lightcoral;
 }
+
+<style >
+.jumbotron {
+    background-image: url('https://picsum.photos/id/237/1200/600');
+    background-size: cover;
+    color: white;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background-color: #f7f7f7;
+    border-bottom: none;
+    padding: 20px;
+    position: relative;
+}
+
+    .card-header:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-top: 3px solid #dc3545;
+    }
+
+.card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.social-links i {
+    font-size: 24px;
+    margin-right: 10px;
+}
