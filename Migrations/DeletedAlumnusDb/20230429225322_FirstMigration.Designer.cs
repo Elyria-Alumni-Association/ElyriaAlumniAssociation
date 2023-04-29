@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElyriaAlumniAssociation.Migrations.DeletedAlumnusDb
 {
     [DbContext(typeof(DeletedAlumnusDbContext))]
-    [Migration("20230417003523_SelectedInDatabase")]
-    partial class SelectedInDatabase
+    [Migration("20230429225322_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

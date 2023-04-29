@@ -66,7 +66,7 @@ namespace ElyriaAlumniAssociation.Controllers
         {
             //Seeds Database uncomment to seed new entries.
             //AlumnusSeeder seeder = new AlumnusSeeder();
-            //seeder.SeedAlumni(_context, 100);
+            //seeder.SeedAlumni(_context, 500);
 
             ViewData["CurrentSort"] = sortOrder;
             ViewData["LastNameSortParam"] = sortOrder == "last_name" ? "last_name_desc" : "last_name";

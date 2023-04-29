@@ -38,6 +38,7 @@ namespace ElyriaAlumniAssociation.Migrations
                     ROTC = table.Column<bool>(type: "bit", nullable: false),
                     OtherActivities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CurrentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Selected = table.Column<bool>(type: "bit", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

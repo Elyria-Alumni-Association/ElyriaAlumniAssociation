@@ -4,7 +4,7 @@
 
 namespace ElyriaAlumniAssociation.Migrations.DeletedAlumnusDb
 {
-    public partial class FirstMigrationDeletedContext : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,7 +36,8 @@ namespace ElyriaAlumniAssociation.Migrations.DeletedAlumnusDb
                     ClassOfficer = table.Column<bool>(type: "bit", nullable: false),
                     ROTC = table.Column<bool>(type: "bit", nullable: false),
                     OtherActivities = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CurrentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CurrentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Selected = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

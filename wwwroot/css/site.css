@@ -28,13 +28,6 @@ a{
     color:lightcoral;
 }
 
-<style >
-.jumbotron {
-    background-image: url('https://picsum.photos/id/237/1200/600');
-    background-size: cover;
-    color: white;
-}
-
 .card {
     margin-bottom: 30px;
 }

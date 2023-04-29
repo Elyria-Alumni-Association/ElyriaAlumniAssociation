@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElyriaAlumniAssociation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230414004911_AddAdminAccount")]
-    partial class AddAdminAccount
+    [Migration("20230429225017_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,6 +112,9 @@ namespace ElyriaAlumniAssociation.Migrations
                     b.Property<string>("School")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Selected")
+                        .HasColumnType("bit");
 
                     b.Property<string>("State")
                         .IsRequired()

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElyriaAlumniAssociation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230417003217_SelectedInDatabase")]
-    partial class SelectedInDatabase
+    [Migration("20230429225058_AddAdminAccount")]
+    partial class AddAdminAccount
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

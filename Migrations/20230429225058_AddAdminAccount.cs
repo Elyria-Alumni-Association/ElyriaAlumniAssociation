@@ -20,14 +20,14 @@ namespace ElyriaAlumniAssociation.Migrations
             sb.AppendLine("VALUES(");
             sb.AppendLine($"'{ADMIN_USER_GUID}'");
             sb.AppendLine(",'lengen.6@gmail.com'");
-            sb.AppendLine(",'LENGEN.6@GMAIL.COM'");
+            sb.AppendLine(",'lengen.6@gmail.com'");
             sb.AppendLine(",'lengen.6@gmail.com'");
             sb.AppendLine(", 1");
             sb.AppendLine(", 0");
             sb.AppendLine(", 0");
             sb.AppendLine(", 0");
             sb.AppendLine(", 0");
-            sb.AppendLine(",'LENGEN.6@GMAIL.COM'");
+            sb.AppendLine(",'lengen.6@gmail.com'");
             sb.AppendLine($", '{passwordHash}'");
             sb.AppendLine(",'Admin'");
             sb.AppendLine(")");

@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
@@ -26,6 +25,7 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="CSVFiles\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Migrations\DeletedAlumnusDb\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
