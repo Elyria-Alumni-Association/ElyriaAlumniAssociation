@@ -50,6 +50,7 @@ How to setup the application locally.
 	Open the EmailSender.cs file and replace the email address on lines 45 and 66 with the email address that you would like the applications emails to come from.
 	
 	*Please note, this step will differ for a cloud deployment, and the steps above will not work for any non-local deployment. You will need a solution for vaulting and retrieving API Keys that works in the cloud environment of your choosing.
+	 This may also involve small code changes to the AuthMessageSenderOptions.cs file.
 	
 6.) Run the application.
 	In Visual Studio click on the green play arrow with the application name next to it and the application will launch.
