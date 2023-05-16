@@ -9,30 +9,31 @@ namespace ElyriaAlumniAssociation.Services
     public class EmailSender : IEmailSender
     {
         private readonly ILogger _logger;
+        private readonly string? _sendGridKey;
+        private readonly string _emailFromAddress;
 
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
                            ILogger<EmailSender> logger)
         {
-            Options = optionsAccessor.Value;
             _logger = logger;
+            _sendGridKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY") ?? optionsAccessor.Value.SendGridKey;
+            _emailFromAddress = Environment.GetEnvironmentVariable("EMAIL_FROM_ADDRESS")!;
         }
-
-        public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
 
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
-            if (string.IsNullOrEmpty(Options.SendGridKey))
+            if (string.IsNullOrEmpty(_sendGridKey))
             {
                 throw new Exception("Null SendGridKey");
             }
 
             if(subject == "Alumni Data")
             {
-                await Execute(Options.SendGridKey, subject, message, toEmail, ".\\CSVFiles\\AlumniData.csv");
+                await Execute(_sendGridKey, subject, message, toEmail, ".\\CSVFiles\\AlumniData.csv");
             }
             else
             {
-                await Execute(Options.SendGridKey, subject, message, toEmail);
+                await Execute(_sendGridKey, subject, message, toEmail);
             }
         }
 
@@ -42,7 +43,7 @@ namespace ElyriaAlumniAssociation.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("m.lengen1@mail.lorainccc.edu", "Elyria Alumni Association"),
+                From = new EmailAddress(_emailFromAddress, "Elyria Alumni Association"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
@@ -63,7 +64,7 @@ namespace ElyriaAlumniAssociation.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("m.lengen1@mail.lorainccc.edu", "Elyria Alumni Association"),
+                From = new EmailAddress(_emailFromAddress, "Elyria Alumni Association"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
