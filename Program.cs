@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+builder.WebHost.UseSentry();
 
 
 var app = builder.Build();
@@ -40,6 +41,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+if (app.Environment.IsProduction()) 
+{
+    app.UseSentryTracing();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -363,5 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Sensitive Files
-appsettings.json
 APIKey.txt
